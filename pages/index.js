@@ -1,12 +1,11 @@
 import React from 'react';
-import Head from 'next/head';
+import { Button } from 'antd';
+import Metadata from '../components/Metadata';
 
 const index = () => {
   return (
     <>
-      <Head>
-        <title>Yorrick Bakker | Web Developer</title>
-      </Head>
+      <Metadata />
     </>
   );
 };

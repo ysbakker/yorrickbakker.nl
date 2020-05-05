@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button } from 'antd';
 import Metadata from '../components/Metadata';
+import Layout from '../components/Layout';
 
 const index = () => {
   return (
     <>
       <Metadata />
+      <Layout />
     </>
   );
 };

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circle animation test</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      }
+      body {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      .square {
+        background-color: #8630f2;
+        color: white;
+      }
+      .circle {
+        background: #8630f2;
+        height: 200px;
+        position: relative;
+      }
+      .circle h1 {
+        position: absolute;
+        z-index: 1;
+      }
+      .circle:before {
+        z-index: 0;
+        content: '';
+        position: absolute;
+        bottom: 50px;
+        right: -30px;
+        border-radius: 50%;
+        width: 210%;
+        height: 200%;
+        background-color: white;
+      }
+
+      .circle:before:hover {
+        width: 250%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle"><h1>Hallo</h1></div>
+    <div class="square">
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, vero?
+        Fugiat harum sed magni? Dicta quo esse temporibus dolor, labore amet
+        voluptas eos sit ipsum non, quae necessitatibus sed recusandae.
+      </p>
+    </div>
+  </body>
+</html>

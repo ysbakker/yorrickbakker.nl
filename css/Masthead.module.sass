@@ -1,12 +1,15 @@
+@import './colors'
+
 .mast-container
   display: flex
   flex-direction: column
-  padding: 3rem 0
+  align-items: center
   width: 100%
   background-image: url('/masthead-image-small.jpg')
   background-position: center
   background-size: cover
   position: relative
+  padding: .5em 0 1em 0
   &:before
     content: ''
     position: absolute
@@ -15,6 +18,23 @@
     width: 100%
     height: 100%
     background: rgba(255,255,255,0.8)
+    z-index: 1
+  *
+    margin: 0
+    z-index: 2
+  div
+    text-align: center
+    margin: 2em 0 0 0
+    &:last-child
+      margin: 2em 0
+  h1
+    font-size: 2em
+    color: $darkpurple
+  h2
+    position: relative
+    top: -.25em
+    font-size: 1.5em
+    color: $purple
 
 @media screen and ( min-width: 576px )
   .mast-container

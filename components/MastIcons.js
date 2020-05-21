@@ -1,8 +1,14 @@
 import React from 'react'
-import './MastIcons.scss'
+import styles from '../css/MastIcons.module.sass'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 const MastIcons = () => {
-  return null
+  return (
+    <div className={styles['icon-container']}>
+      <FaGithub />
+      <FaLinkedin />
+    </div>
+  )
 }
 
 export default MastIcons

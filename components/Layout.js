@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import Slanted from '../components/Slanted'
 import Masthead from '../components/Masthead'
+import IntroText from '../components/IntroText'
 
 const Layout = () => {
   return (
@@ -14,8 +15,15 @@ const Layout = () => {
       <Row>
         <Col span={24}>
           <Slanted>
-            <div className="title-header darkblue">
-              <p>Hello</p>
+            <IntroText />
+          </Slanted>
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <Slanted>
+            <div className="heading darkblue lift-up">
+              <h1>Hello</h1>
             </div>
           </Slanted>
         </Col>

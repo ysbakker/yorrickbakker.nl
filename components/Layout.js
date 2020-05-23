@@ -20,13 +20,7 @@ const Layout = () => {
         </Col>
       </Row>
       <Row>
-        <Col span={24}>
-          <Slanted>
-            <div className="heading darkblue lift-up">
-              <h1>Hello</h1>
-            </div>
-          </Slanted>
-        </Col>
+        <Col span={24}></Col>
       </Row>
     </div>
   )

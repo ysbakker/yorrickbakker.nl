@@ -8,15 +8,27 @@
 .layout-container
   width: 100%
 
-.heading
-  text-align: center
-  font-weight: bold
-  padding: 1em 0 0 0
+.slanted
   &>*
-    font-size: 2.5em
-    color: #fff
-  &.darkblue
+    text-align: center
+    padding: 1em 0
+    &>*
+      margin: 0
+  .heading
+    font-weight: bold
+    &>*
+      font-size: 2.5em
+      color: #fff
+  .paragraph
+    font-weight: 500
+    padding: 3em 2em
+    &>p
+      font-size: 1.2em
+      color: #fff
+  .darkblue
     background: $darkblue
+  .purple
+    background: $purple
 
 .lift-up
   margin: -1em 0 0 0 !important

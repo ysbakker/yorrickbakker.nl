@@ -3,7 +3,7 @@ import '../css/IntroText.module.sass'
 
 const IntroText = () => {
   return (
-    <div className="paragraph purple lift-up">
+    <div className="paragraph darkblue lift-up">
       <p>
         Ik ben Yorrick, {age('1999-03-03')} jaar oud en tweedejaars student web
         development aan de HAN in Arnhem. Binnen de informatica heb ik een breed

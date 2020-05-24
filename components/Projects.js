@@ -6,19 +6,35 @@ const Projects = () => {
   return (
     <>
       <Slanted>
-        <div className="heading purple">
+        <div className="heading darkblue">
           <h1>Projecten</h1>
         </div>
       </Slanted>
-      <Project>
-        <h2>Quizzer</h2>
-      </Project>
+      <Project
+        heading="Quizzer"
+        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
+          nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
+          nulla consequuntur."
+      />
     </>
   )
 }
 
 export default Projects
 
-const Project = () => {
-  return null
+const Project = props => {
+  return (
+    <>
+      <Slanted>
+        <div className="heading darkgreyblue">
+          <h2>{props.heading}</h2>
+        </div>
+      </Slanted>
+      <Slanted>
+        <div className="paragraph greyblue no-margin align-left">
+          <p>{props.text}</p>
+        </div>
+      </Slanted>
+    </>
+  )
 }

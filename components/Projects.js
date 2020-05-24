@@ -2,6 +2,8 @@ import React from 'react'
 import styles from '../css/Projects.module.sass'
 import Slanted from './Slanted'
 import TechnologyIcons from './TechnologyIcons'
+import { Button } from 'antd'
+import { FaGithub, FaDesktop } from 'react-icons/fa'
 
 const Projects = () => {
   return (
@@ -17,6 +19,8 @@ const Projects = () => {
           nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
           nulla consequuntur."
         technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
+        codeLink="https://github.com/ysbakker/Quizzer-WS"
+        demoLink="https://quizzer.yorrickbakker.nl"
       />
     </>
   )
@@ -31,10 +35,36 @@ const Project = props => {
         </div>
       </Slanted>
       <Slanted>
-        <div className="paragraph greyblue no-margin align-left">
-          <p>{props.text}</p>
-          <div className={styles['technologies']}>
-            <TechnologyIcons technologies={props.technologies} />
+        <div className="paragraph greyblue no-margin">
+          <div className="project-wrapper">
+            <p className="align-left">{props.text}</p>
+            <div className={styles['technologies']}>
+              <TechnologyIcons technologies={props.technologies} />
+            </div>
+            <div className={styles['button-links']}>
+              <a
+                href={props.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button size="large" type="primary">
+                  <FaGithub />
+                  Code
+                </Button>
+              </a>
+              {props.demoLink && (
+                <a
+                  href={props.demoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button size="large" type="primary">
+                    <FaDesktop />
+                    Demo
+                  </Button>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </Slanted>

@@ -2,3 +2,27 @@
 
 .technologies
   background: $darkgreyblue
+  padding: 1em 0
+
+.button-links
+  width: 100%
+  display: flex
+  justify-content: center
+  padding: 2em 2em
+  &>*
+    box-sizing: border-box
+    flex: 1
+    margin: 0 1em 0 0
+    &:last-child
+      margin: 0
+  button
+    width: 100%
+    background: $darkblue
+    border: none
+    font-weight: bold
+    &:hover
+      background: lighten($darkblue, 20)
+    &>*:first-child
+      position: relative
+      top: 3px
+      margin-right: .5em

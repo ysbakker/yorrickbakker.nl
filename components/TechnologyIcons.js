@@ -8,7 +8,12 @@ const TechnologyIcons = ({ technologies }) => {
   return (
     <div className={styles['technology-wrapper']}>
       {technologies.map(tech => (
-        <Tooltip mouseEnterDelay={0} mouseLeaveDelay={0} title={tech}>
+        <Tooltip
+          key={tech}
+          mouseEnterDelay={0}
+          mouseLeaveDelay={0}
+          title={tech}
+        >
           {iconParser(tech.toLowerCase())}
         </Tooltip>
       ))}

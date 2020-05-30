@@ -42,27 +42,27 @@ const Project = props => {
               <TechnologyIcons technologies={props.technologies} />
             </div>
             <div className={styles['button-links']}>
-              <a
+              <Button
                 href={props.codeLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                size="large"
+                type="primary"
               >
-                <Button size="large" type="primary">
-                  <FaGithub />
-                  Code
-                </Button>
-              </a>
+                <FaGithub />
+                Code
+              </Button>
               {props.demoLink && (
-                <a
+                <Button
                   href={props.demoLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  size="large"
+                  type="primary"
                 >
-                  <Button size="large" type="primary">
-                    <FaDesktop />
-                    Demo
-                  </Button>
-                </a>
+                  <FaDesktop />
+                  Demo
+                </Button>
               )}
             </div>
           </div>

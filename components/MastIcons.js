@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../css/MastIcons.module.sass'
-import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from 'react-icons/fa'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 const MastIcons = () => {
   return (

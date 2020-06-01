@@ -13,7 +13,12 @@ const Contact = () => {
       </Slanted>
       <Slanted>
         <div className="form blue no-margin">
-          <Form name="contact" className={styles['contact-form']} size="large">
+          <Form
+            name="contact"
+            className={styles['contact-form']}
+            size="large"
+            labelCol={{ span: 3 }}
+          >
             <Form.Item
               label="Naam"
               name="name"

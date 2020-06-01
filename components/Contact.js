@@ -1,6 +1,7 @@
 import React from 'react'
-import '../css/Contact.module.sass'
+import styles from '../css/Contact.module.sass'
 import Slanted from './Slanted'
+import { Form, Input } from 'antd'
 
 const Contact = () => {
   return (
@@ -11,13 +12,33 @@ const Contact = () => {
         </div>
       </Slanted>
       <Slanted>
-        <div className="paragraph blue no-margin">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-            voluptates ullam architecto praesentium error distinctio sed
-            assumenda nostrum beatae optio modi deserunt dolorem illum eligendi
-            placeat corrupti accusamus, ut repudiandae.
-          </p>
+        <div className="form blue no-margin">
+          <Form name="contact" className={styles['contact-form']} size="large">
+            <Form.Item
+              label="Naam"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vul hier uw naam in',
+                },
+              ]}
+            >
+              <Input placeholder="Harry" />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: 'Vul hier uw emailadres in',
+                },
+              ]}
+            >
+              <Input placeholder="harry@gmail.com" type="email" />
+            </Form.Item>
+          </Form>
         </div>
       </Slanted>
     </>

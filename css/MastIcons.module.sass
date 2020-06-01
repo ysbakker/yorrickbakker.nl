@@ -2,11 +2,15 @@
 @import './colors'
 
 .icon-container
+  display: flex
   font-size: 2.8em
   &>a
     color: $darkpurple
     margin: 0 .3em 0 0
+    transition: transform .4s
     &:last-child
       margin: 0
     &:hover
+      transform: translateY(-3px)
       color: $blue
+      transition: transform .2s

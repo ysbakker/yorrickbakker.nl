@@ -1,9 +1,10 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import Slanted from '../components/Slanted'
-import Masthead from '../components/Masthead'
-import IntroText from '../components/IntroText'
-import Projects from './Projects.js'
+import Slanted from './Slanted'
+import Masthead from './Masthead'
+import IntroText from './IntroText'
+import Projects from './Projects'
+import Contact from './Contact'
 
 const Layout = () => {
   return (
@@ -23,6 +24,11 @@ const Layout = () => {
       <Row>
         <Col span={24}>
           <Projects />
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <Contact />
         </Col>
       </Row>
     </div>

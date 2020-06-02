@@ -43,7 +43,7 @@ const Project = props => {
           <h2>{props.heading}</h2>
         </div>
       </Slanted>
-      <Slanted>
+      <Slanted className="stick-to-top">
         <div className="greyblue no-margin">
           <div className="project-wrapper">
             <p className="align-left">{props.text}</p>

@@ -11,7 +11,7 @@ const Contact = () => {
           <h1>Contact</h1>
         </div>
       </Slanted>
-      <Slanted>
+      <Slanted className="stick-to-top">
         <div className="form blue no-margin">
           <Form
             name="contact"

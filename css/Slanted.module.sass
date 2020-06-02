@@ -9,7 +9,9 @@ $slant-height: 20px
   z-index: 2
   margin: 2.5em 0 0 0
   &.overlap
-    margin: 0
+    margin-top: 0
+  &.stick-to-top
+    margin-top: calc(#{$slant-height} - 1px)
   &>*:first-child
     width: 100%
     &::before

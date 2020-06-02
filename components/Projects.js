@@ -9,7 +9,7 @@ const Projects = () => {
   return (
     <>
       <Slanted>
-        <div className="heading darkblue">
+        <div className="darkblue">
           <h1>Projecten</h1>
         </div>
       </Slanted>
@@ -39,12 +39,12 @@ const Project = props => {
   return (
     <>
       <Slanted>
-        <div className="heading darkgreyblue">
+        <div className="darkgreyblue">
           <h2>{props.heading}</h2>
         </div>
       </Slanted>
       <Slanted>
-        <div className="paragraph greyblue no-margin">
+        <div className="greyblue no-margin">
           <div className="project-wrapper">
             <p className="align-left">{props.text}</p>
             <div className={styles['technologies']}>

@@ -16,9 +16,7 @@ const Layout = () => {
       </Row>
       <Row>
         <Col span={24}>
-          <Slanted>
-            <IntroText />
-          </Slanted>
+          <IntroText />
         </Col>
       </Row>
       <Row>

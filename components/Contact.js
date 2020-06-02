@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <>
       <Slanted>
-        <div className="heading darkblue">
+        <div className="darkblue">
           <h1>Contact</h1>
         </div>
       </Slanted>

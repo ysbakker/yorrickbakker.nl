@@ -1,6 +1,5 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import Slanted from './Slanted'
 import Masthead from './Masthead'
 import IntroText from './IntroText'
 import Projects from './Projects'

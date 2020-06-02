@@ -4,7 +4,7 @@ import Slanted from './Slanted'
 
 const IntroText = () => {
   return (
-    <Slanted>
+    <Slanted className="overlap">
       <div className="purple">
         <p>
           Ik ben Yorrick, {age('1999-03-03')} jaar oud en tweedejaars student

@@ -4,6 +4,7 @@ import Masthead from './Masthead'
 import IntroText from './IntroText'
 import Projects from './Projects'
 import Contact from './Contact'
+import Footer from './Footer'
 
 const Layout = () => {
   return (
@@ -26,6 +27,11 @@ const Layout = () => {
       <Row>
         <Col span={24}>
           <Contact />
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <Footer />
         </Col>
       </Row>
     </div>

@@ -1,4 +1,5 @@
 @import './colors'
+@import './breakpoints'
 
 .picture-container
   width: 8em
@@ -9,3 +10,9 @@
   img
     width: 100%
     height: 100%
+
+@media screen and ( min-width: $md )
+  .picture-container
+    width: 10em
+    height: 10em
+    border-width: 5px

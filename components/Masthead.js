@@ -10,11 +10,13 @@ const Masthead = () => {
         <ProfilePicture />
       </div>
       <div>
-        <h1>Yorrick Bakker</h1>
-        <h2>Web Developer</h2>
-      </div>
-      <div>
-        <MastIcons />
+        <div>
+          <h1>Yorrick Bakker</h1>
+          <h2>Web Developer</h2>
+        </div>
+        <div>
+          <MastIcons />
+        </div>
       </div>
     </div>
   )

@@ -19,6 +19,14 @@ const Projects = () => {
             <Project
               heading="Quizzer"
               text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
+                nostrum."
+              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
+              codeLink="https://github.com/ysbakker/Quizzer-WS"
+              demoLink="https://quizzer.yorrickbakker.nl"
+            />
+            <Project
+              heading="Quizzer"
+              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
                 nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
                 nulla consequuntur."
               technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}

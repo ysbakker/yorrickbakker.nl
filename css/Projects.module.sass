@@ -34,13 +34,14 @@
   .projects-wrapper
     background: $blue
   .projects-flex-wrapper
-    display: flex
-    justify-content: space-around
-    flex-wrap: wrap
+    padding: 2em 2em
+    column-count: 2
+    column-gap: 3em
     width: $md
   .project
-    width: 300px
-    margin: 2em 0
+    display: inline-block
+    width: 100%
+    margin: 1.5em 0
     box-shadow: 0 0 20px darken($blue, 15)
     transition: all .3s
     &:hover

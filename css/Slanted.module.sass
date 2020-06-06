@@ -1,3 +1,5 @@
+@import './breakpoints'
+
 $slant-height: 20px
 
 .slant-container
@@ -7,7 +9,7 @@ $slant-height: 20px
   align-items: center
   width: 100%
   z-index: 2
-  margin: 2.5em 0 0 0
+  margin: 10px+$slant-height 0 0 0
   &.overlap
     margin-top: 0
   &.stick-to-top
@@ -52,3 +54,45 @@ $slant-height: 20px
       font-size: 1.2em
     form
       padding: 1.5em 2em
+
+@media screen and (min-width: $md)
+  $slant-height: 30px
+
+  .slant-container
+    margin: 10px+$slant-height 0 0 0
+    &.stick-to-top
+      margin-top: calc(#{$slant-height} - 1px)
+    &>*:first-child
+      &::before
+        height: $slant-height
+        top: -$slant-height
+      &::after
+        height: $slant-height
+        bottom: -$slant-height
+    &>*
+      margin: 0
+      display: flex
+      justify-content: center
+      &>*
+        width: $md
+      h1, h2, h3, h4, h5, h6
+        margin: 0
+        font-weight: bold
+        text-align: center
+        padding: .25em 0
+        font-weight: bold
+
+@media screen and (min-width: $xl)
+  $slant-height: 40px
+
+  .slant-container
+    margin: 10px+$slant-height 0 0 0
+    &.stick-to-top
+      margin-top: calc(#{$slant-height} - 1px)
+    &>*:first-child
+      &::before
+        height: $slant-height
+        top: -$slant-height
+      &::after
+        height: $slant-height
+        bottom: -$slant-height

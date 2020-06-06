@@ -1,4 +1,6 @@
 @import './colors'
+@import './breakpoints'
+@import './Slanted.module'
 
 .technologies
   background: $darkgreyblue
@@ -27,3 +29,17 @@
       position: relative
       top: 3px
       margin-right: .5em
+
+@media screen and (min-width: $md)
+  .projects-flex-wrapper
+    display: flex
+    justify-content: space-around
+    flex-wrap: wrap
+    width: $md
+  .project
+    flex-basis: 300px
+    &>div
+      margin: 0 !important
+      &>div
+        &::before, &::after
+          display: none

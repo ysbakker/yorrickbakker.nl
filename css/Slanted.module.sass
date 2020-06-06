@@ -14,6 +14,8 @@ $slant-height: 20px
     margin-top: 0
   &.stick-to-top
     margin-top: calc(#{$slant-height} - 1px)
+  &.no-margin-sm
+    margin-top: 0
   &.bottom>*:first-child::after
     display: none
   &>*:first-child
@@ -25,7 +27,7 @@ $slant-height: 20px
       height: $slant-height
       background: inherit
       top: -$slant-height
-      clip-path: polygon(100% 100%,0 0, 0 100%)
+      clip-path: polygon(100% 100%,100% 0, 0 100%)
     &::after
       content: ''
       position: absolute
@@ -33,7 +35,7 @@ $slant-height: 20px
       height: $slant-height
       background: inherit
       bottom: -$slant-height
-      clip-path: polygon(0px 0px, 100% 100%, 100% 0.00%)
+      clip-path: polygon(0 0, 0 100%, 100% 0%)
   &>*
     margin: 0
     h1, h2, h3, h4, h5, h6

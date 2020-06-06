@@ -13,31 +13,37 @@ const Projects = () => {
           <h1>Projecten</h1>
         </div>
       </Slanted>
-      <Project
-        heading="Quizzer"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
-          nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
-          nulla consequuntur."
-        technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
-        codeLink="https://github.com/ysbakker/Quizzer-WS"
-        demoLink="https://quizzer.yorrickbakker.nl"
-      />
-      <Project
-        heading="Quizzer"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
-          nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
-          nulla consequuntur."
-        technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
-        codeLink="https://github.com/ysbakker/Quizzer-WS"
-        demoLink="https://quizzer.yorrickbakker.nl"
-      />
+      <Slanted className="stick-to-top no-margin-sm">
+        <div className="blue">
+          <div className={styles['projects-flex-wrapper']}>
+            <Project
+              heading="Quizzer"
+              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
+                nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
+                nulla consequuntur."
+              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
+              codeLink="https://github.com/ysbakker/Quizzer-WS"
+              demoLink="https://quizzer.yorrickbakker.nl"
+            />
+            <Project
+              heading="Quizzer"
+              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
+                nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
+                nulla consequuntur."
+              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
+              codeLink="https://github.com/ysbakker/Quizzer-WS"
+              demoLink="https://quizzer.yorrickbakker.nl"
+            />
+          </div>
+        </div>
+      </Slanted>
     </>
   )
 }
 
 const Project = props => {
   return (
-    <>
+    <div className={styles['project']}>
       <Slanted>
         <div className="darkgreyblue">
           <h2>{props.heading}</h2>
@@ -45,7 +51,7 @@ const Project = props => {
       </Slanted>
       <Slanted className="stick-to-top">
         <div className="greyblue no-margin">
-          <div className="project-wrapper">
+          <div>
             <p className="align-left">{props.text}</p>
             <div className={styles['technologies']}>
               <TechnologyIcons technologies={props.technologies} />
@@ -77,7 +83,7 @@ const Project = props => {
           </div>
         </div>
       </Slanted>
-    </>
+    </div>
   )
 }
 

@@ -14,7 +14,7 @@ const Projects = () => {
         </div>
       </Slanted>
       <Slanted className="stick-to-top no-margin-sm">
-        <div className="blue">
+        <div className={styles['projects-wrapper']}>
           <div className={styles['projects-flex-wrapper']}>
             <Project
               heading="Quizzer"

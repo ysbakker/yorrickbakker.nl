@@ -31,13 +31,21 @@
       margin-right: .5em
 
 @media screen and (min-width: $md)
+  .projects-wrapper
+    background: $blue
   .projects-flex-wrapper
     display: flex
     justify-content: space-around
     flex-wrap: wrap
     width: $md
   .project
-    flex-basis: 300px
+    width: 300px
+    margin: 2em 0
+    box-shadow: 0 0 20px darken($blue, 15)
+    transition: all .3s
+    &:hover
+      transform: translateY(-4px)
+      box-shadow: 0 4px 30px darken($blue, 15)
     &>div
       margin: 0 !important
       &>div

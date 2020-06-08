@@ -8,9 +8,9 @@ const Footer = () => {
     <Slanted className="bottom stick-to-top">
       <div className={`${styles['footer']} darkblue`}>
         <p>
-          <FaCopyright />
-          &nbsp;
           {new Date().getFullYear()}
+          &nbsp;
+          <FaCopyright />
           &nbsp;Yorrick Bakker
         </p>
       </div>

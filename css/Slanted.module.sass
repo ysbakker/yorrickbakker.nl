@@ -78,12 +78,6 @@ $slant-height: 20px
       justify-content: center
       &>*
         width: $md
-      h1, h2, h3, h4, h5, h6
-        margin: 0
-        font-weight: bold
-        text-align: center
-        padding: .25em 0
-        font-weight: bold
 
 @media screen and (min-width: $xl)
   $slant-height: 40px
@@ -99,3 +93,5 @@ $slant-height: 20px
       &::after
         height: $slant-height
         bottom: -$slant-height
+    &>&>*
+      width: $xl

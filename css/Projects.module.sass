@@ -34,21 +34,30 @@
   .projects-wrapper
     background: $blue
   .projects-flex-wrapper
-    padding: 2em 2em
-    column-count: 2
-    column-gap: 3em
+    display: flex
+    justify-content: center
+    align-items: stretch
+    flex-wrap: wrap
     width: $md
   .project
-    display: inline-block
-    width: 100%
-    margin: 1.5em 0
-    box-shadow: 0 0 20px darken($blue, 15)
+    width: 325px
+    margin: 1.5em
+    box-shadow: 0 0 20px darken($blue, 11)
     transition: all .3s
+    display: flex
+    flex-direction: column
     &:hover
       transform: translateY(-4px)
-      box-shadow: 0 4px 30px darken($blue, 15)
+      box-shadow: 0 4px 30px darken($blue, 11)
     &>div
       margin: 0 !important
       &>div
         &::before, &::after
           display: none
+      &:last-child
+        flex: 1
+        &>div>div
+          display: flex
+          flex-direction: column
+          &>p
+            flex: 1

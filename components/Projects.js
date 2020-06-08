@@ -61,32 +61,34 @@ const Project = props => {
         <div className="greyblue no-margin">
           <div>
             <p className="align-left">{props.text}</p>
-            <div className={styles['technologies']}>
-              <TechnologyIcons technologies={props.technologies} />
-            </div>
-            <div className={styles['button-links']}>
-              <Button
-                href={props.codeLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="large"
-                type="primary"
-              >
-                <FaGithub />
-                Code
-              </Button>
-              {props.demoLink && (
+            <div>
+              <div className={styles['technologies']}>
+                <TechnologyIcons technologies={props.technologies} />
+              </div>
+              <div className={styles['button-links']}>
                 <Button
-                  href={props.demoLink}
+                  href={props.codeLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   size="large"
                   type="primary"
                 >
-                  <FaDesktop />
-                  Demo
+                  <FaGithub />
+                  Code
                 </Button>
-              )}
+                {props.demoLink && (
+                  <Button
+                    href={props.demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    size="large"
+                    type="primary"
+                  >
+                    <FaDesktop />
+                    Demo
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </div>

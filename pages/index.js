@@ -1,6 +1,6 @@
-import React from 'react';
-import Metadata from '../components/Metadata';
-import Layout from '../components/Layout';
+import React from 'react'
+import Metadata from '../components/Metadata'
+import Layout from '../components/Layout'
 
 const index = () => {
   return (
@@ -8,7 +8,7 @@ const index = () => {
       <Metadata />
       <Layout />
     </>
-  );
-};
+  )
+}
 
-export default index;
+export default index

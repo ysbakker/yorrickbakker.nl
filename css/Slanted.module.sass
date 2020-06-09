@@ -13,7 +13,7 @@ $slant-height: 20px
   &.overlap
     margin-top: 0
   &.stick-to-top
-    margin-top: calc(#{$slant-height} - 1px)
+    margin-top: calc(#{$slant-height} - 2px)
   &.no-margin-sm
     margin-top: 0
   &.bottom>*:first-child::after
@@ -27,7 +27,7 @@ $slant-height: 20px
       width: 100%
       height: $slant-height
       background: inherit
-      top: -$slant-height
+      top: -$slant-height + 0.5px
       clip-path: polygon(100% 100%,100% 0, 0 100%)
     &::after
       content: ''
@@ -35,7 +35,7 @@ $slant-height: 20px
       width: 100%
       height: $slant-height
       background: inherit
-      bottom: -$slant-height
+      bottom: -$slant-height + 0.5px
       clip-path: polygon(0 0, 0 100%, 100% 0%)
   &>*
     margin: 0
@@ -64,14 +64,14 @@ $slant-height: 20px
   .slant-container
     margin: 10px+$slant-height 0 0 0
     &.stick-to-top
-      margin-top: calc(#{$slant-height} - 1px)
+      margin-top: calc(#{$slant-height} - 2px)
     &>*:first-child
       &::before
         height: $slant-height
-        top: -$slant-height
+        top: -$slant-height + 0.5px
       &::after
         height: $slant-height
-        bottom: -$slant-height
+        bottom: -$slant-height + 0.5px
     &>*
       margin: 0
       display: flex
@@ -85,13 +85,13 @@ $slant-height: 20px
   .slant-container
     margin: 10px+$slant-height 0 0 0
     &.stick-to-top
-      margin-top: calc(#{$slant-height} - 1px)
+      margin-top: calc(#{$slant-height} - 2px)
     &>*:first-child
       &::before
         height: $slant-height
-        top: -$slant-height
+        top: -$slant-height + 0.5px
       &::after
         height: $slant-height
-        bottom: -$slant-height
-    &>&>*
+        bottom: -$slant-height + 0.5px
+    &>*>*
       width: $xl

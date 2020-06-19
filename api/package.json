@@ -1,0 +1,14 @@
+{
+  "name": "api.yorrickbakker.nl",
+  "version": "1.0.0",
+  "description": "The RESTful backend API for my portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yorrick Bakker",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

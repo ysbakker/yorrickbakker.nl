@@ -1,10 +1,18 @@
 require('dotenv').config()
 
 const app = require('express')()
-const port = process.env.PORT
+const mongoose = require('mongoose')
 
-app.get('/', (req, res) => {
-  res.send({ message: 'hello there!' })
-})
+mongoose
+  .connect(`${process.env.MONGO_URL}/YorrickBakker`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .catch(e => {
+    console.log(process.env.MONGO_URL)
+    console.log(e)
+  })
 
-app.listen(port)
+app.use('/projects', require('./routes/projects'))
+
+app.listen(process.env.PORT)

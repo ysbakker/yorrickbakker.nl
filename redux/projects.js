@@ -10,7 +10,6 @@ export const fetchProjects = () => {
     const projects = await (
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`)
     ).json()
-    console.log(projects)
     dispatch(setProjects(projects))
 
     dispatch(fetching(false))

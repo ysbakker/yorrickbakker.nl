@@ -5,14 +5,17 @@ import TechnologyIcons from './TechnologyIcons'
 import { Button } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { fetchProjects } from '../redux/projects'
 
 const Projects = () => {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(fetchProjects())
-  })
+  }, [])
+
+  const { fetching, data } = useSelector(state => state.projects, shallowEqual)
   return (
     <>
       <Slanted>
@@ -23,32 +26,16 @@ const Projects = () => {
       <Slanted className="stick-to-top no-margin-sm">
         <div className={styles['projects-wrapper']}>
           <div className={styles['projects-flex-wrapper']}>
-            <Project
-              heading="Quizzer"
-              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
-                nostrum."
-              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
-              codeLink="https://github.com/ysbakker/Quizzer-WS"
-              demoLink="https://quizzer.yorrickbakker.nl"
-            />
-            <Project
-              heading="Quizzer"
-              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
-                nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
-                nulla consequuntur."
-              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
-              codeLink="https://github.com/ysbakker/Quizzer-WS"
-              demoLink="https://quizzer.yorrickbakker.nl"
-            />
-            <Project
-              heading="Quizzer"
-              text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet
-                nostrum consequatur soluta laudantium! Officia, atque. Culpa quis
-                nulla consequuntur."
-              technologies={['Docker', 'React', 'Nodejs', 'MongoDB']}
-              codeLink="https://github.com/ysbakker/Quizzer-WS"
-              demoLink="https://quizzer.yorrickbakker.nl"
-            />
+            {data.map(({ heading, text, technologies, codeLink, demoLink }) => (
+              <Project
+                key={heading}
+                heading={heading}
+                text={text}
+                technologies={technologies}
+                codeLink={codeLink}
+                demoLink={demoLink}
+              />
+            ))}
           </div>
         </div>
       </Slanted>

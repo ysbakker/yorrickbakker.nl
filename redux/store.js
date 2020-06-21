@@ -1,7 +1,11 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import rootReducer from './reducers/root'
+import projects from './projects'
+
+const rootReducer = combineReducers({
+  projects,
+})
 
 const store =
   process.env.NODE_ENV !== 'production'

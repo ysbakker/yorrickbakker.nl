@@ -4,8 +4,15 @@ import Slanted from './Slanted'
 import TechnologyIcons from './TechnologyIcons'
 import { Button } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { fetchProjects } from '../redux/projects'
 
 const Projects = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchProjects())
+  })
   return (
     <>
       <Slanted>

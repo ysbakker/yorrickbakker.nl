@@ -1,16 +1,23 @@
 import produce from 'immer'
 
 const FETCHING_PROJECTS = 'Fetching projects'
+const FETCHING_SUCCESS = 'Fetching success'
 const SET_PROJECTS = 'Set projects'
 
 export const fetchProjects = () => {
   return async dispatch => {
+    dispatch(success(null))
     dispatch(fetching(true))
 
-    const projects = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`)
-    ).json()
-    dispatch(setProjects(projects))
+    try {
+      const projects = await (
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`)
+      ).json()
+      dispatch(setProjects(projects))
+      dispatch(success(true))
+    } catch (e) {
+      dispatch(success(false))
+    }
 
     dispatch(fetching(false))
   }
@@ -19,6 +26,11 @@ export const fetchProjects = () => {
 const fetching = isFetching => ({
   type: FETCHING_PROJECTS,
   payload: isFetching,
+})
+
+const success = fetchSuccesful => ({
+  type: FETCHING_SUCCESS,
+  payload: fetchSuccesful,
 })
 
 const setProjects = projects => ({
@@ -32,14 +44,18 @@ const projects = produce(
     switch (type) {
       case FETCHING_PROJECTS:
         draft.fetching = payload
-        return
+        break
       case SET_PROJECTS:
         draft.data = payload
-        return
+        break
+      case FETCHING_SUCCESS:
+        draft.success = payload
+        break
     }
   },
   {
     fetching: false,
+    success: null,
     data: [],
   }
 )

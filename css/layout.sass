@@ -9,10 +9,30 @@
 .align-left
   text-align: left !important
 
+.fix-to-top
+  position: fixed
+  top: 0
+
+.force-foreground
+  z-index: 9999
+
+.w-100
+  width: 100%
+
 .darkblue
   background: $darkblue
   &>*
     color: #fff
+  &.fetching
+    animation: breathe 2s linear infinite
+    @keyframes breathe
+      0%
+        background: $darkblue
+      20%
+        background: darken($darkblue, 20)
+      40%
+        background: $darkblue
+
 .blue
   background: $blue
   &>*

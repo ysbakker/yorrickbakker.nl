@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../css/Projects.module.sass'
 import Slanted from './Slanted'
 import TechnologyIcons from './TechnologyIcons'
-import { Button } from 'antd'
+import { Button, Alert } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -15,30 +15,47 @@ const Projects = () => {
     dispatch(fetchProjects())
   }, [])
 
-  const { fetching, data } = useSelector(state => state.projects, shallowEqual)
+  const { fetching, success, data } = useSelector(
+    state => state.projects,
+    shallowEqual
+  )
+
   return (
     <>
       <Slanted>
-        <div className="darkblue">
+        <div className={`darkblue${fetching ? ' fetching' : ''}`}>
           <h1>Projecten</h1>
         </div>
       </Slanted>
-      <Slanted className="stick-to-top no-margin-sm">
-        <div className={styles['projects-wrapper']}>
-          <div className={styles['projects-flex-wrapper']}>
-            {data.map(({ heading, text, technologies, codeLink, demoLink }) => (
-              <Project
-                key={heading}
-                heading={heading}
-                text={text}
-                technologies={technologies}
-                codeLink={codeLink}
-                demoLink={demoLink}
-              />
-            ))}
+      {fetching || !success || (
+        <Slanted className="stick-to-top no-margin-sm">
+          <div className={styles['projects-wrapper']}>
+            <div className={styles['projects-flex-wrapper']}>
+              {data.map(
+                ({ heading, text, technologies, codeLink, demoLink }) => (
+                  <Project
+                    key={heading}
+                    heading={heading}
+                    text={text}
+                    technologies={technologies}
+                    codeLink={codeLink}
+                    demoLink={demoLink}
+                  />
+                )
+              )}
+            </div>
           </div>
-        </div>
-      </Slanted>
+        </Slanted>
+      )}
+      {!fetching && success === false && (
+        <Alert
+          className="fix-to-top force-foreground w-100"
+          type="error"
+          message="API is not responding!"
+          banner
+          closable
+        />
+      )}
     </>
   )
 }

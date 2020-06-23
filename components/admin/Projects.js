@@ -20,6 +20,7 @@ const Projects = () => {
 
   return (
     <div className={styles['projects-editor']}>
+      <h1>Projecten</h1>
       {data.map(({ _id, heading, text, technologies, codeLink, demoLink }) => (
         <Card
           key={_id}

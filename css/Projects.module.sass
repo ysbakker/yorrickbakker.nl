@@ -31,7 +31,18 @@
       margin-right: .5em
 
 .projects-editor
+  background: $blue
   flex: 1
+  display: flex
+  flex-wrap: wrap
+  padding: .5em
+  &>*
+    flex: 1
+    min-width: 300px
+    margin: .5em
+  h1
+    color: #fff
+    flex-basis: 100%
   .tech-highlight
     display: inline-block
     border-radius: 5px
@@ -83,3 +94,14 @@
 @media screen and (min-width: $xl)
   .projects-flex-wrapper
     width: $xl
+
+  .projects-editor
+    flex: 1
+    display: flex
+    flex-wrap: wrap
+    padding: .5em
+    &>*
+      margin: 1em
+    h1
+      margin: .5em
+      flex-basis: 100%

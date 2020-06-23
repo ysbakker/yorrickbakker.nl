@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../../css/TechnologyIcons.module.sass'
-import { FaDocker, FaReact, FaNodeJs } from 'react-icons/fa'
+import { FaDocker, FaReact, FaNodeJs, FaQuestionCircle } from 'react-icons/fa'
 import { DiMongodb } from 'react-icons/di'
 import { Tooltip } from 'antd'
 
@@ -31,6 +31,8 @@ const iconParser = name => {
       return <FaNodeJs className={styles[name]} />
     case 'mongodb':
       return <DiMongodb className={styles[name]} />
+    default:
+      return <FaQuestionCircle />
   }
 }
 

@@ -32,9 +32,9 @@ const Projects = () => {
           <div className={styles['projects-wrapper']}>
             <div className={styles['projects-flex-wrapper']}>
               {data.map(
-                ({ heading, text, technologies, codeLink, demoLink }) => (
+                ({ _id, heading, text, technologies, codeLink, demoLink }) => (
                   <Project
-                    key={heading}
+                    key={_id}
                     heading={heading}
                     text={text}
                     technologies={technologies}

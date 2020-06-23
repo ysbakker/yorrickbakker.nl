@@ -14,8 +14,8 @@ const Projects = () => {
 
   return (
     <div className={styles['projects-editor']}>
-      {data.map(({ heading, text, technologies, codeLink, demoLink }) => (
-        <Card key={heading} title={heading}>
+      {data.map(({ _id, heading, text, technologies, codeLink, demoLink }) => (
+        <Card key={_id} title={heading}>
           {text}
         </Card>
       ))}

@@ -1,5 +1,4 @@
 import React from 'react'
-import '../css/IntroText.module.sass'
 import Slanted from './Slanted'
 
 const IntroText = () => {

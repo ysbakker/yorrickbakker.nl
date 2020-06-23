@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/Footer.module.sass'
+import styles from '../../css/Footer.module.sass'
 import Slanted from './Slanted'
 import { FaCopyright } from 'react-icons/fa'
 

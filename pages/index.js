@@ -1,6 +1,6 @@
 import React from 'react'
-import Metadata from '../components/Metadata'
-import Layout from '../components/Layout'
+import Metadata from '../components/index/Metadata'
+import Layout from '../components/index/Layout'
 
 const index = () => {
   return (

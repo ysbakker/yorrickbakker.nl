@@ -1,12 +1,12 @@
 import React from 'react'
-import styles from '../css/Projects.module.sass'
+import styles from '../../css/Projects.module.sass'
 import Slanted from './Slanted'
 import TechnologyIcons from './TechnologyIcons'
 import { Button, Alert } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { fetchProjects } from '../redux/projects'
+import { fetchProjects } from '../../redux/projects'
 
 const Projects = () => {
   const dispatch = useDispatch()

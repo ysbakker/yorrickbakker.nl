@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/Masthead.module.sass'
+import styles from '../../css/Masthead.module.sass'
 import ProfilePicture from './ProfilePicture'
 import MastIcons from './MastIcons'
 

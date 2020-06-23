@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/Slanted.module.sass'
+import styles from '../../css/Slanted.module.sass'
 
 const Slanted = ({ children, className }) => {
   className =

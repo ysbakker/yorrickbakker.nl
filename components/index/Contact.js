@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/Contact.module.sass'
+import styles from '../../css/Contact.module.sass'
 import Slanted from './Slanted'
 import { Form, Input } from 'antd'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/ProfilePicture.module.sass'
+import styles from '../../css/ProfilePicture.module.sass'
 
 const ProfilePicture = () => {
   return (

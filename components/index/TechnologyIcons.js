@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../css/TechnologyIcons.module.sass'
+import styles from '../../css/TechnologyIcons.module.sass'
 import { FaDocker, FaReact, FaNodeJs } from 'react-icons/fa'
 import { DiMongodb } from 'react-icons/di'
 import { Tooltip } from 'antd'

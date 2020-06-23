@@ -5,7 +5,7 @@ import Metadata from '../components/index/Metadata'
 const admin = () => {
   return (
     <>
-      <Metadata />
+      <Metadata title="Yorrick Bakker | Portfolio Admin" />
       <Layout />
     </>
   )

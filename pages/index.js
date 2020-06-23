@@ -5,7 +5,7 @@ import Layout from '../components/index/Layout'
 const index = () => {
   return (
     <>
-      <Metadata />
+      <Metadata title="Yorrick Bakker | Web Developer" />
       <Layout />
     </>
   )

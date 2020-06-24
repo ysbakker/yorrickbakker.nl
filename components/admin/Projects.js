@@ -4,12 +4,15 @@ import {
   fetchProjects,
   toggleDeleteModal,
   setDeleteModalProject,
+  setEditModalProject,
+  toggleEditModal,
 } from '../../redux/projects'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Card } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
 import DeleteModal from './DeleteModal'
+import EditModal from './EditModal'
 
 const Projects = () => {
   const dispatch = useDispatch()
@@ -19,7 +22,10 @@ const Projects = () => {
     dispatch(fetchProjects())
   }, [])
 
-  const editProject = project => {}
+  const editProject = project => {
+    dispatch(setEditModalProject(project))
+    dispatch(toggleEditModal(true))
+  }
 
   const deleteProject = project => {
     dispatch(setDeleteModalProject(project))
@@ -72,6 +78,7 @@ const Projects = () => {
         )
       })}
       <DeleteModal />
+      <EditModal />
     </div>
   )
 }

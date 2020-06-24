@@ -73,7 +73,9 @@ const deletingProject = isDeleting => ({
 })
 
 export const updateProject = project => {
-  return async dispatch => {}
+  return async dispatch => {
+    dispatch(toggleEditModal(false))
+  }
 }
 
 export const toggleEditModal = isVisible => ({

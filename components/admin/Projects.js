@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
 import styles from '../../css/Projects.module.sass'
-import { fetchProjects } from '../../redux/projects'
+import {
+  fetchProjects,
+  toggleDeleteModal,
+  setDeleteModalProject,
+} from '../../redux/projects'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Card } from 'antd'
 import { FaGithub, FaDesktop } from 'react-icons/fa'
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
+import DeleteModal from './DeleteModal'
 
 const Projects = () => {
   const dispatch = useDispatch()
@@ -14,9 +19,12 @@ const Projects = () => {
     dispatch(fetchProjects())
   }, [])
 
-  const editProject = id => {}
+  const editProject = (id, name) => {}
 
-  const deleteProject = id => {}
+  const deleteProject = (id, name) => {
+    dispatch(setDeleteModalProject({ id, name }))
+    dispatch(toggleDeleteModal(true))
+  }
 
   return (
     <div className={styles['projects-editor']}>
@@ -29,12 +37,12 @@ const Projects = () => {
             <AiOutlineEdit
               className="anticon"
               key="edit"
-              onClick={() => editProject(_id)}
+              onClick={() => editProject(_id, heading)}
             />,
             <AiFillDelete
               className="anticon"
               key="delete"
-              onClick={() => deleteProject(_id)}
+              onClick={() => deleteProject(_id, heading)}
             />,
           ]}
         >
@@ -60,6 +68,7 @@ const Projects = () => {
           ))}
         </Card>
       ))}
+      <DeleteModal />
     </div>
   )
 }

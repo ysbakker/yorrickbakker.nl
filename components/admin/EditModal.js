@@ -1,32 +1,32 @@
 import React from 'react'
 import { Modal } from 'antd'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { deleteProject, toggleDeleteModal } from '../../redux/projects'
+import { updateProject, toggleEditModal } from '../../redux/projects'
 
-const DeleteModal = () => {
+const EditModal = () => {
   const dispatch = useDispatch()
-  const { deleteModal: { visible, deleting, project } = {} } = useSelector(
+  const { editModal: { visible, updating, project } = {} } = useSelector(
     state => state.projects,
     shallowEqual
   )
 
   const handleOk = () => {
-    dispatch(deleteProject(project))
+    dispatch(updateProject(project))
   }
   const handleCancel = () => {
-    dispatch(toggleDeleteModal(false))
+    dispatch(toggleEditModal(false))
   }
   return (
     <Modal
       visible={visible}
       onOk={handleOk}
       onCancel={handleCancel}
-      confirmLoading={deleting}
+      confirmLoading={updating}
       okButtonProps={{ danger: true }}
     >
-      <p>Delete {(project && project.heading) || 'project'}?</p>
+      <p>Edit {(project && project.heading) || 'project'}?</p>
     </Modal>
   )
 }
 
-export default DeleteModal
+export default EditModal

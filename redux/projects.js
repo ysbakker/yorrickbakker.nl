@@ -6,6 +6,8 @@ const SET_PROJECTS = 'Set projects'
 const TOGGLE_DELETE_MODAL = 'Toggle delete project modal'
 const SET_DELETE_MODAL_PROJECT = 'Set delete project modal project'
 const DELETING_PROJECT = 'Set deleting project status'
+const TOGGLE_EDIT_MODAL = 'Toggle edit project modal'
+const SET_EDIT_MODAL_PROJECT = 'Set edit project modal project'
 
 export const fetchProjects = () => {
   return async dispatch => {
@@ -45,7 +47,7 @@ export const deleteProject = project => {
   return async dispatch => {
     dispatch(deletingProject(true))
 
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project.id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
       method: 'DELETE',
     })
 
@@ -70,6 +72,20 @@ const deletingProject = isDeleting => ({
   payload: isDeleting,
 })
 
+export const updateProject = project => {
+  return async dispatch => {}
+}
+
+export const toggleEditModal = isVisible => ({
+  type: TOGGLE_EDIT_MODAL,
+  payload: isVisible,
+})
+
+export const setEditModalProject = project => ({
+  type: SET_EDIT_MODAL_PROJECT,
+  payload: project,
+})
+
 const projects = produce(
   (draft, action) => {
     const { type, payload } = action
@@ -92,6 +108,12 @@ const projects = produce(
       case DELETING_PROJECT:
         draft.deleteModal.deleting = payload
         break
+      case TOGGLE_EDIT_MODAL:
+        draft.editModal.visible = payload || !draft.editModal.visible
+        break
+      case SET_EDIT_MODAL_PROJECT:
+        draft.editModal.project = payload || {}
+        break
     }
   },
   {
@@ -101,6 +123,11 @@ const projects = produce(
     deleteModal: {
       visible: false,
       deleting: false,
+      project: {},
+    },
+    editModal: {
+      visible: false,
+      updating: false,
       project: {},
     },
   }

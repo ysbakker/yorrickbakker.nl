@@ -40,6 +40,15 @@ const EditModal = () => {
           layout="vertical"
           initialValues={{
             ...project,
+            technologies:
+              project.technologies &&
+              project.technologies.reduce(
+                (acc, tech, index) =>
+                  index + 1 >= project.technologies.length
+                    ? `${acc}${tech}`
+                    : `${acc}${tech}, `,
+                ''
+              ),
             codeLink:
               project.codeLink &&
               project.codeLink.replace('https://', '').replace('http://', ''),
@@ -71,6 +80,9 @@ const EditModal = () => {
             ]}
           >
             <TextArea rows="4" placeholder="Een mooi project" />
+          </Form.Item>
+          <Form.Item label="Technologieën" name="technologies">
+            <Input placeholder="React, MongoDB, Nodejs" />
           </Form.Item>
           <Form.Item label="Code-link" name="codeLink">
             <Input addonBefore="https://" placeholder="github.com/code" />

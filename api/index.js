@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-const app = require('express')()
+const express = require('express')
+const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 
@@ -19,6 +20,8 @@ app.use(
     origin: process.env.ORIGINS.split(','),
   })
 )
+
+app.use(express.json())
 
 app.use('/projects', require('./routes/projects'))
 

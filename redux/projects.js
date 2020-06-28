@@ -77,9 +77,20 @@ export const updateProject = project => {
   return async dispatch => {
     dispatch(updatingProject(true))
 
+    const { technologies, codeLink, demoLink } = project
+
+    project.technologies =
+      technologies && technologies.split(',').map(tech => tech.trim())
+
+    project.codeLink = appendHttps(codeLink)
+    project.demoLink = appendHttps(demoLink)
+
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
       method: 'PUT',
-      body: JSON.stringify(project),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...project, _id: undefined }),
     })
 
     dispatch(updatingProject(false))
@@ -152,5 +163,12 @@ const projects = produce(
     },
   }
 )
+
+const appendHttps = url => {
+  if (url.indexOf('https://') !== -1) return url
+  else if (url.indexOf('http://') !== -1)
+    return url.replace('http://', 'https://')
+  else return `https://${url}`
+}
 
 export default projects

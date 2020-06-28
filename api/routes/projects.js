@@ -1,7 +1,7 @@
 const projects = require('express').Router()
 const projectsModel = require('../models/projects')
 
-projects.get('/', async (req, res, next) => {
+projects.get('/', async (req, res) => {
   try {
     const projects = await projectsModel.find()
     return res.send(projects)
@@ -10,7 +10,7 @@ projects.get('/', async (req, res, next) => {
   }
 })
 
-projects.delete('/:project', async (req, res, next) => {
+projects.delete('/:project', async (req, res) => {
   const { project } = req.params
 
   if (!project) return res.status(400).send({ message: 'Missing project id' })
@@ -21,6 +21,25 @@ projects.delete('/:project', async (req, res, next) => {
     return res.status(500).send({ message: e.message })
   }
   return res.status(204).send()
+})
+
+projects.put('/:project', async (req, res) => {
+  const { project: projectId } = req.params
+
+  if (!projectId) return res.status(400).send({ message: 'Missing project id' })
+
+  const project = req.body
+
+  try {
+    await projectsModel.updateOne({ _id: projectId }, project, {
+      upsert: true,
+      runValidators: true,
+      setDefaultsOnInsert: true,
+    })
+  } catch (e) {
+    return res.status(500).send({ message: e.message })
+  }
+  return res.status(200).send()
 })
 
 module.exports = projects

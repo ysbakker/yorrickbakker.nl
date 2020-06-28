@@ -19,7 +19,7 @@ const EditModal = () => {
   }, [project])
 
   const handleOk = () => {
-    dispatch(updateProject(project))
+    dispatch(updateProject({ ...form.getFieldsValue(), _id: project._id }))
   }
   const handleCancel = () => {
     dispatch(toggleEditModal(false))

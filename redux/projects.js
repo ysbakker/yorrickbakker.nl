@@ -8,6 +8,7 @@ const SET_DELETE_MODAL_PROJECT = 'Set delete project modal project'
 const DELETING_PROJECT = 'Set deleting project status'
 const TOGGLE_EDIT_MODAL = 'Toggle edit project modal'
 const SET_EDIT_MODAL_PROJECT = 'Set edit project modal project'
+const UPDATING_PROJECT = 'Set updating project status'
 
 export const fetchProjects = () => {
   return async dispatch => {
@@ -74,7 +75,16 @@ const deletingProject = isDeleting => ({
 
 export const updateProject = project => {
   return async dispatch => {
+    dispatch(updatingProject(true))
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
+      method: 'PUT',
+      body: JSON.stringify(project),
+    })
+
+    dispatch(updatingProject(false))
     dispatch(toggleEditModal(false))
+    dispatch(fetchProjects())
   }
 }
 
@@ -86,6 +96,11 @@ export const toggleEditModal = isVisible => ({
 export const setEditModalProject = project => ({
   type: SET_EDIT_MODAL_PROJECT,
   payload: project,
+})
+
+const updatingProject = isUpdating => ({
+  type: UPDATING_PROJECT,
+  payload: isUpdating,
 })
 
 const projects = produce(
@@ -115,6 +130,9 @@ const projects = produce(
         break
       case SET_EDIT_MODAL_PROJECT:
         draft.editModal.project = payload || {}
+        break
+      case UPDATING_PROJECT:
+        draft.editModal.updating = payload
         break
     }
   },

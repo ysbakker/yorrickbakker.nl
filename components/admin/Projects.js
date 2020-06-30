@@ -6,10 +6,11 @@ import {
   setDeleteModalProject,
   setEditModalProject,
   toggleEditModal,
+  setEditModalCreating,
 } from '../../redux/projects'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { Card } from 'antd'
-import { FaGithub, FaDesktop } from 'react-icons/fa'
+import { Card, Button } from 'antd'
+import { FaGithub, FaDesktop, FaPlus } from 'react-icons/fa'
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai'
 import DeleteModal from './DeleteModal'
 import EditModal from './EditModal'
@@ -23,7 +24,14 @@ const Projects = () => {
   }, [])
 
   const editProject = project => {
+    dispatch(setEditModalCreating(false))
     dispatch(setEditModalProject(project))
+    dispatch(toggleEditModal(true))
+  }
+
+  const createProject = () => {
+    dispatch(setEditModalCreating(true))
+    dispatch(setEditModalProject(null))
     dispatch(toggleEditModal(true))
   }
 
@@ -34,7 +42,16 @@ const Projects = () => {
 
   return (
     <div className={styles['projects-editor']}>
-      <h1>Projecten</h1>
+      <div>
+        <h1>Projecten</h1>
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<FaPlus />}
+          size="large"
+          onClick={createProject}
+        />
+      </div>
       {data.map(project => {
         const { _id, heading, text, technologies, codeLink, demoLink } = project
         return (

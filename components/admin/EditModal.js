@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
 import { Modal, Form, Input } from 'antd'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { updateProject, toggleEditModal } from '../../redux/projects'
+import {
+  updateProject,
+  toggleEditModal,
+  createProject,
+} from '../../redux/projects'
 import TextArea from 'antd/lib/input/TextArea'
 import { useForm } from 'antd/lib/form/util'
 
 const EditModal = () => {
   const dispatch = useDispatch()
-  const { editModal: { visible, updating, project } = {} } = useSelector(
-    state => state.projects,
-    shallowEqual
-  )
+  const {
+    editModal: { visible, creating, updating, project } = {},
+  } = useSelector(state => state.projects, shallowEqual)
 
   const [form] = useForm()
 
@@ -19,7 +22,8 @@ const EditModal = () => {
   }, [project])
 
   const handleOk = () => {
-    dispatch(updateProject({ ...form.getFieldsValue(), _id: project._id }))
+    if (creating) dispatch(createProject({ ...form.getFieldsValue() }))
+    else dispatch(updateProject({ ...form.getFieldsValue(), _id: project._id }))
   }
   const handleCancel = () => {
     dispatch(toggleEditModal(false))
@@ -27,7 +31,11 @@ const EditModal = () => {
   return (
     project && (
       <Modal
-        title={`Updating ${project.heading || 'project'}`}
+        title={
+          creating
+            ? `Creating new project`
+            : `Updating ${project.heading || 'project'}`
+        }
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -81,14 +89,40 @@ const EditModal = () => {
           >
             <TextArea rows="4" placeholder="Een mooi project" />
           </Form.Item>
-          <Form.Item label="Technologieën" name="technologies">
+          <Form.Item
+            label="Technologieën"
+            name="technologies"
+            rules={[
+              {
+                required: true,
+                message: 'Vul hier de (kommagescheiden) technologieën in',
+              },
+            ]}
+          >
             <Input placeholder="React, MongoDB, Nodejs" />
           </Form.Item>
-          <Form.Item label="Code-link" name="codeLink">
-            <Input addonBefore="https://" placeholder="github.com/code" />
+          <Form.Item
+            label="Code-link"
+            name="codeLink"
+            rules={[
+              {
+                required: true,
+                message: 'Vul hier de link naar de code in',
+              },
+            ]}
+          >
+            <Input
+              addonBefore="https://"
+              placeholder="github.com/code"
+              type="url"
+            />
           </Form.Item>
           <Form.Item label="Demo-link" name="demoLink">
-            <Input addonBefore="https://" placeholder="domain.com/demo" />
+            <Input
+              addonBefore="https://"
+              placeholder="domain.com/demo"
+              type="url"
+            />
           </Form.Item>
         </Form>
       </Modal>

@@ -8,6 +8,7 @@ const SET_DELETE_MODAL_PROJECT = 'Set delete project modal project'
 const DELETING_PROJECT = 'Set deleting project status'
 const TOGGLE_EDIT_MODAL = 'Toggle edit project modal'
 const SET_EDIT_MODAL_PROJECT = 'Set edit project modal project'
+const SET_EDIT_MODAL_CREATING = 'Set edit project modal creating mode'
 const UPDATING_PROJECT = 'Set updating project status'
 
 export const fetchProjects = () => {
@@ -77,16 +78,30 @@ export const updateProject = project => {
   return async dispatch => {
     dispatch(updatingProject(true))
 
-    const { technologies, codeLink, demoLink } = project
-
-    project.technologies =
-      technologies && technologies.split(',').map(tech => tech.trim())
-
-    project.codeLink = appendHttps(codeLink)
-    project.demoLink = appendHttps(demoLink)
+    project = formatProject(project)
 
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...project, _id: undefined }),
+    })
+
+    dispatch(updatingProject(false))
+    dispatch(toggleEditModal(false))
+    dispatch(fetchProjects())
+  }
+}
+
+export const createProject = project => {
+  return async dispatch => {
+    dispatch(updatingProject(true))
+
+    project = formatProject(project)
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -107,6 +122,11 @@ export const toggleEditModal = isVisible => ({
 export const setEditModalProject = project => ({
   type: SET_EDIT_MODAL_PROJECT,
   payload: project,
+})
+
+export const setEditModalCreating = isCreating => ({
+  type: SET_EDIT_MODAL_CREATING,
+  payload: isCreating,
 })
 
 const updatingProject = isUpdating => ({
@@ -145,6 +165,9 @@ const projects = produce(
       case UPDATING_PROJECT:
         draft.editModal.updating = payload
         break
+      case SET_EDIT_MODAL_CREATING:
+        draft.editModal.creating = payload
+        break
     }
   },
   {
@@ -157,12 +180,26 @@ const projects = produce(
       project: {},
     },
     editModal: {
+      creating: false,
       visible: false,
       updating: false,
       project: {},
     },
   }
 )
+
+const formatProject = project => {
+  project = { ...project }
+  const { technologies, codeLink, demoLink } = project
+
+  project.technologies =
+    technologies && technologies.split(',').map(tech => tech.trim())
+
+  project.codeLink = codeLink && appendHttps(codeLink)
+  project.demoLink = demoLink && appendHttps(demoLink)
+
+  return project
+}
 
 const appendHttps = url => {
   if (url.indexOf('https://') !== -1) return url

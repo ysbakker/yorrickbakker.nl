@@ -37,13 +37,20 @@
   flex-wrap: wrap
   align-items: flex-start
   padding: .5em
+  div:first-child
+    flex-basis: 100%
+    display: flex
+    align-items: center
+    h1
+      flex-basis: 100%
+      color: #fff
+    svg
+      position: relative
+      top: 2px
   &>*
     flex: 1
     min-width: 300px
     margin: .5em
-  h1
-    color: #fff
-    flex-basis: 100%
   .tech-highlight
     display: inline-block
     border-radius: 5px

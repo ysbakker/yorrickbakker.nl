@@ -32,7 +32,7 @@ projects.put('/:project', async (req, res) => {
 
   try {
     await projectsModel.updateOne({ _id: projectId }, project, {
-      upsert: true,
+      upsert: false,
       runValidators: true,
       setDefaultsOnInsert: true,
     })
@@ -40,6 +40,17 @@ projects.put('/:project', async (req, res) => {
     return res.status(500).send({ message: e.message })
   }
   return res.status(200).send()
+})
+
+projects.post('/', async (req, res) => {
+  const project = req.body
+
+  try {
+    await projectsModel.create(project)
+  } catch (e) {
+    return res.status(500).send({ message: e.message })
+  }
+  return res.status(201).send()
 })
 
 module.exports = projects

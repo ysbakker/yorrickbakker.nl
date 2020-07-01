@@ -26,7 +26,8 @@ const iconParser = name => {
     case 'docker':
       return <FaDocker className={styles[name]} />
     case 'react':
-      return <FaReact className={styles[name]} />
+    case 'next.js':
+      return <FaReact className={styles.react} />
     case 'nodejs':
       return <FaNodeJs className={styles[name]} />
     case 'mongodb':

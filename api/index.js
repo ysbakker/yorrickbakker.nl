@@ -24,5 +24,6 @@ app.use(
 app.use(express.json())
 
 app.use('/projects', require('./routes/projects'))
+app.use('/messages', require('./routes/messages'))
 
 app.listen(process.env.PORT)

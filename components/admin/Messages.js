@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../../css/Messages.module.sass'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { fetchMessages } from '../../redux/messages'
-import { Collapse, Empty } from 'antd'
+import { fetchMessages, deleteMessage } from '../../redux/messages'
+import { Collapse, Empty, Modal } from 'antd'
 import { FaReply, FaTrash } from 'react-icons/fa'
 
 const Messages = () => {
+  // Enable / disable the confirmation modal when deleting a message
+  const UNSAFE_DELETE = true
+
   const dispatch = useDispatch()
-  const { data } = useSelector(state => state.messages)
+  const { data, deleting } = useSelector(state => state.messages)
+
+  const [selectedMessage, setSelectedMessage] = useState(null)
 
   useEffect(() => {
     dispatch(fetchMessages())
@@ -32,6 +37,8 @@ const Messages = () => {
                     }}
                     handleDelete={event => {
                       event.stopPropagation()
+                      if (UNSAFE_DELETE) dispatch(deleteMessage(message._id))
+                      else setSelectedMessage(message._id)
                     }}
                   />
                 }
@@ -44,6 +51,21 @@ const Messages = () => {
           <Empty description="Geen berichten :(" />
         )}
       </div>
+      {!UNSAFE_DELETE && (
+        <Modal
+          confirmLoading={deleting}
+          visible={selectedMessage || deleting}
+          onOk={async () => {
+            dispatch(deleteMessage(selectedMessage))
+            setSelectedMessage(null)
+          }}
+          onCancel={() => {
+            setSelectedMessage(null)
+          }}
+        >
+          <p>Verwijder bericht?</p>
+        </Modal>
+      )}
     </div>
   )
 }

@@ -1,10 +1,11 @@
 import produce from 'immer'
 
 const TOGGLE_FETCHING = 'Toggle fetching messages'
-const SET_FETCHING_SUCCESSFUL = 'Set fetching successful'
+const SET_FETCHING_SUCCESSFUL = 'Set fetching messages successful'
 
 export const sendMessage = message => {
   return async dispatch => {
+    dispatch(setFetchingSuccessful(null))
     dispatch(toggleFetching(true))
 
     try {
@@ -48,6 +49,9 @@ const messages = produce(
     switch (type) {
       case TOGGLE_FETCHING:
         draft.fetching = payload || !draft.fetching
+        break
+      case SET_FETCHING_SUCCESSFUL:
+        draft.success = payload
         break
     }
   },

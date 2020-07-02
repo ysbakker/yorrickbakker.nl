@@ -1,0 +1,15 @@
+@import './colors'
+@import './breakpoints'
+
+.messages
+  background: $purple
+  padding: .5em
+  h1
+    color: #fff
+  &>*
+    margin: .5rem
+
+@media screen and (min-width: $xl)
+  .messages
+    &>*
+      margin: 1rem

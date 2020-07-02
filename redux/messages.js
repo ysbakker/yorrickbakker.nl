@@ -2,6 +2,7 @@ import produce from 'immer'
 
 const TOGGLE_FETCHING = 'Toggle fetching messages'
 const SET_FETCHING_SUCCESSFUL = 'Set fetching messages successful'
+const SET_MESSAGES = 'Set messages'
 
 export const sendMessage = message => {
   return async dispatch => {
@@ -26,6 +27,19 @@ export const sendMessage = message => {
   }
 }
 
+export const fetchMessages = () => {
+  return async dispatch => {
+    dispatch(toggleFetching(true))
+
+    const messages = await (
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/messages`)
+    ).json()
+    dispatch(setMessages(messages))
+
+    dispatch(toggleFetching(false))
+  }
+}
+
 const toggleFetching = isFetching => ({
   type: TOGGLE_FETCHING,
   payload: isFetching,
@@ -36,12 +50,10 @@ const setFetchingSuccessful = isSuccessful => ({
   payload: isSuccessful,
 })
 
-export const fetchMessages = () => {
-  return async dispatch => {
-    dispatch(toggleFetching(true))
-    dispatch(toggleFetching(false))
-  }
-}
+const setMessages = messages => ({
+  type: SET_MESSAGES,
+  payload: messages,
+})
 
 const messages = produce(
   (draft, action) => {
@@ -53,6 +65,8 @@ const messages = produce(
       case SET_FETCHING_SUCCESSFUL:
         draft.success = payload
         break
+      case SET_MESSAGES:
+        draft.data = payload
     }
   },
   {

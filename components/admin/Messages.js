@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchMessages } from '../../redux/messages'
 import { Collapse, Empty } from 'antd'
+import { FaReply, FaTrash } from 'react-icons/fa'
 
 const Messages = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,17 @@ const Messages = () => {
               <Collapse.Panel
                 key={message._id}
                 header={`${message.name} | ${message.email}`}
+                extra={
+                  <MessageButtons
+                    handleReply={event => {
+                      event.stopPropagation()
+                      location.href = generateMailto(message)
+                    }}
+                    handleDelete={event => {
+                      event.stopPropagation()
+                    }}
+                  />
+                }
               >
                 <div>{message.message}</div>
               </Collapse.Panel>
@@ -32,6 +44,23 @@ const Messages = () => {
           <Empty description="Geen berichten :(" />
         )}
       </div>
+    </div>
+  )
+}
+
+const generateMailto = msg => {
+  const { name, email, message } = msg
+  const subject = message
+    .split(' ')
+    .reduce((acc, cur, i) => (i > 6 ? acc : `${acc}${cur} `), '')
+  return `mailto:${email}?subject=RE: "${subject}..."&body=Beste ${name},%0A%0AVia mijn website heeft u dit bericht gestuurd:%0A${message}`
+}
+
+const MessageButtons = ({ handleReply, handleDelete }) => {
+  return (
+    <div className={styles['message-buttons']}>
+      <FaReply onClick={handleReply} />
+      <FaTrash onClick={handleDelete} />
     </div>
   )
 }

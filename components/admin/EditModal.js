@@ -6,8 +6,6 @@ import {
   toggleEditModal,
   createProject,
 } from '../../redux/projects'
-import TextArea from 'antd/lib/input/TextArea'
-import { useForm } from 'antd/lib/form/util'
 
 const EditModal = () => {
   const dispatch = useDispatch()
@@ -15,7 +13,7 @@ const EditModal = () => {
     editModal: { visible, creating, updating, project } = {},
   } = useSelector(state => state.projects, shallowEqual)
 
-  const [form] = useForm()
+  const [form] = Form.useForm()
 
   useEffect(() => {
     form.resetFields()
@@ -87,7 +85,7 @@ const EditModal = () => {
               },
             ]}
           >
-            <TextArea rows="4" placeholder="Een mooi project" />
+            <Input.TextArea rows="4" placeholder="Een mooi project" />
           </Form.Item>
           <Form.Item
             label="Technologieën"

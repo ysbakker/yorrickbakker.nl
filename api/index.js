@@ -12,8 +12,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .catch(e => {
-    console.log(process.env.MONGO_URL)
-    console.log(e)
+    console.error(e)
   })
 
 app.use(

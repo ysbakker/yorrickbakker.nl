@@ -27,4 +27,11 @@ app.use('/auth', require('./routes/auth'))
 app.use('/projects', require('./routes/projects'))
 app.use('/messages', require('./routes/messages'))
 
+// Error handling
+app.use((err, req, res, next) => {
+  return res
+    .status(err.rescode || 500)
+    .send({ error: err.message || 'Something went wrong' })
+})
+
 app.listen(process.env.PORT)

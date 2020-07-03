@@ -12,6 +12,7 @@
   "license": "GNU General Public License v3.0",
   "dependencies": {
     "antd": "^4.2.0",
+    "bcryptjs": "^2.4.3",
     "immer": "^7.0.1",
     "next": "^9.3.6",
     "react": "^16.13.1",

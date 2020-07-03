@@ -10,8 +10,8 @@ auth.post('/login', async (req, res, next) => {
   }
 
   try {
-    await usersModel.login(username, password)
-    return res.status(200).send()
+    const token = await usersModel.login(username, password)
+    return res.status(200).send(token)
   } catch (e) {
     return next(e)
   }

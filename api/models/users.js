@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const refreshTokensModel = require('./refreshTokens')
 const bcrypt = require('bcryptjs')
 
 const users = new mongoose.Schema({
@@ -35,6 +36,8 @@ users.static('login', async function (username, password) {
     e.rescode = 401
     throw e
   }
+
+  return await refreshTokensModel.generate(user)
 })
 
 module.exports = mongoose.model('Users', users)

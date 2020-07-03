@@ -7,6 +7,7 @@ const cors = require('cors')
 
 mongoose
   .connect(`${process.env.MONGO_URL}/YorrickBakker`, {
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

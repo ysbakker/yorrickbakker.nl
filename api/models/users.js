@@ -16,8 +16,13 @@ const users = new mongoose.Schema({
 users.static('register', async function (username, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
-
-  await this.create({ username, password: hash })
+  try {
+    await this.create({ username, password: hash })
+  } catch (e) {
+    if (e.code === 11000)
+      e = { ...e, rescode: 400, message: 'User already exists!' }
+    throw e
+  }
 })
 
 users.static('login', async function (username, password) {

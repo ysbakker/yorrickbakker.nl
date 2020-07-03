@@ -23,9 +23,6 @@ const refreshTokens = new mongoose.Schema({
 
 refreshTokens.static('generate', async function (user) {
   const token = createToken()
-  while (await this.findOne({ token })) {
-    token = createToken()
-  }
 
   const generatedDate = new Date()
   const expiryDate = new Date().setMonth(generatedDate.getMonth() + 1)

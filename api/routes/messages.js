@@ -1,7 +1,8 @@
 const messages = require('express').Router()
 const messagesModel = require('../models/messages')
+const { verifySession } = require('../middleware/authentication')
 
-messages.get('/', async (req, res) => {
+messages.get('/', verifySession, async (req, res) => {
   const messages = await messagesModel.find().lean()
   res.send(messages)
 })
@@ -16,7 +17,7 @@ messages.post('/', async (req, res) => {
   return res.status(201).send()
 })
 
-messages.delete('/:message', async (req, res) => {
+messages.delete('/:message', verifySession, async (req, res) => {
   const { message } = req.params
 
   if (!message) return res.status(400).send({ message: 'Missing message id' })

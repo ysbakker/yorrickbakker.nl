@@ -49,4 +49,8 @@ auth.get('/users', verifySession, async (req, res) => {
   return res.send(users)
 })
 
+auth.get('/', verifySession, async (req, res) => {
+  res.status(200).send()
+})
+
 module.exports = auth

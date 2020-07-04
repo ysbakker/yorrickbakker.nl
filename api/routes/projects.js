@@ -1,5 +1,6 @@
 const projects = require('express').Router()
 const projectsModel = require('../models/projects')
+const { verifySession } = require('../middleware/authentication')
 
 projects.get('/', async (req, res) => {
   try {
@@ -10,7 +11,7 @@ projects.get('/', async (req, res) => {
   }
 })
 
-projects.delete('/:project', async (req, res) => {
+projects.delete('/:project', verifySession, async (req, res) => {
   const { project } = req.params
 
   if (!project) return res.status(400).send({ message: 'Missing project id' })
@@ -23,7 +24,7 @@ projects.delete('/:project', async (req, res) => {
   return res.status(204).send()
 })
 
-projects.put('/:project', async (req, res) => {
+projects.put('/:project', verifySession, async (req, res) => {
   const { project: projectId } = req.params
 
   if (!projectId) return res.status(400).send({ message: 'Missing project id' })
@@ -42,7 +43,7 @@ projects.put('/:project', async (req, res) => {
   return res.status(200).send()
 })
 
-projects.post('/', async (req, res) => {
+projects.post('/', verifySession, async (req, res) => {
   const project = req.body
 
   try {

@@ -10,8 +10,14 @@ const verifySession = async (req, res, next) => {
   }
 
   try {
-    const result = await sessionsModel.verifyToken(token)
-    req.auth = result
+    const tokenData = await sessionsModel.verifyToken(token)
+    const expires = await sessionsModel.refreshSession(token)
+    req.auth = { ...tokenData, expires }
+    res.cookie('session-token', token, {
+      expires: expires,
+      httpOnly: true,
+      secure: true,
+    })
   } catch (e) {
     e.message = 'Invalid session'
     e.rescode = 403
@@ -21,4 +27,4 @@ const verifySession = async (req, res, next) => {
   next()
 }
 
-module.exports = { sessionIsValid: verifySession }
+module.exports = { verifySession }

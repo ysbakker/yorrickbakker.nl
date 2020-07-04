@@ -19,8 +19,10 @@ users.static('register', async function (username, password) {
   try {
     await this.create({ username, password: hash })
   } catch (e) {
-    if (e.code === 11000)
-      e = { ...e, rescode: 400, message: 'User already exists!' }
+    if (e.code === 11000) {
+      e.message = 'User already exists!'
+      e.rescode = 400
+    }
     throw e
   }
 })

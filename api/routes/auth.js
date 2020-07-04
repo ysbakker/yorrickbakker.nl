@@ -1,6 +1,6 @@
 const auth = require('express').Router()
 const usersModel = require('../models/users')
-const { sessionIsValid } = require('../middleware/authentication')
+const { verifySession } = require('../middleware/authentication')
 
 auth.post('/login', async (req, res, next) => {
   const { username, password } = req.body
@@ -16,7 +16,6 @@ auth.post('/login', async (req, res, next) => {
     res.cookie('session-token', token, {
       expires: new Date(expires),
       httpOnly: true,
-      path: '/admin',
       secure: true,
     })
 
@@ -27,6 +26,8 @@ auth.post('/login', async (req, res, next) => {
 })
 
 auth.post('/register', async (req, res, next) => {
+  // Opening this endpoint allows anyone to register and modify projects/messages
+  return res.status(403).send()
   const { username, password } = req.body
 
   if (!username || !password) {
@@ -43,7 +44,7 @@ auth.post('/register', async (req, res, next) => {
   }
 })
 
-auth.get('/users', sessionIsValid, async (req, res) => {
+auth.get('/users', verifySession, async (req, res) => {
   const users = await usersModel.find()
   return res.send(users)
 })

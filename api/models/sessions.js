@@ -39,12 +39,20 @@ sessions.static('generate', async function (user) {
 })
 
 sessions.static('verifyToken', async function (token) {
-  const result = await this.findOne({ token }).populate('user')
+  const result = await this.findOne({ token }).populate('user').lean()
 
   if (!result || result.expires.getTime() < new Date().getTime())
     throw new Error()
 
   return result
+})
+
+sessions.static('refreshSession', async function (token) {
+  const expires = new Date()
+  expires.setMonth(expires.getMonth() + 1)
+  await this.updateOne({ token }, { expires })
+
+  return expires
 })
 
 const createToken = () => {

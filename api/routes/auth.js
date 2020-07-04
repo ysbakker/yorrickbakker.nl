@@ -12,7 +12,7 @@ auth.post('/login', async (req, res, next) => {
   try {
     const { token, expiryDate } = await usersModel.login(username, password)
 
-    res.cookie('refresh-token', token, {
+    res.cookie('session-token', token, {
       expires: new Date(expiryDate),
       httpOnly: true,
       path: '/admin',

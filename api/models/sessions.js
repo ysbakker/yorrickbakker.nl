@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const crypto = require('crypto')
 const bcrypt = require('bcryptjs')
 
-const refreshTokens = new mongoose.Schema({
+const sessions = new mongoose.Schema({
   token: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const refreshTokens = new mongoose.Schema({
   },
 })
 
-refreshTokens.static('generate', async function (user) {
+sessions.static('generate', async function (user) {
   const token = createToken()
   const hashedToken = await bcrypt.hash(createToken(), 10)
 
@@ -43,4 +43,4 @@ const createToken = () => {
   return crypto.randomBytes(16).toString('base64')
 }
 
-module.exports = mongoose.model('RefreshTokens', refreshTokens)
+module.exports = mongoose.model('Sessions', sessions)

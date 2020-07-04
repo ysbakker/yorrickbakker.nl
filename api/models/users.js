@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const refreshTokensModel = require('./refreshTokens')
+const sessionsModel = require('./sessions')
 const bcrypt = require('bcryptjs')
 
 const users = new mongoose.Schema({
@@ -36,7 +36,7 @@ users.static('login', async function (username, password) {
     throw e
   }
 
-  return await refreshTokensModel.generate(user)
+  return await sessionsModel.generate(user)
 })
 
 module.exports = mongoose.model('Users', users)

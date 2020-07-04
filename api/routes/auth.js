@@ -10,8 +10,16 @@ auth.post('/login', async (req, res, next) => {
   }
 
   try {
-    const token = await usersModel.login(username, password)
-    return res.status(200).send(token)
+    const { token, expiryDate } = await usersModel.login(username, password)
+
+    res.cookie('refresh-token', token, {
+      expires: new Date(expiryDate),
+      httpOnly: true,
+      path: '/admin',
+      secure: true,
+    })
+
+    return res.status(200).send()
   } catch (e) {
     return next(e)
   }

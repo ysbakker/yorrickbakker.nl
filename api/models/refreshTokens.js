@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const crypto = require('crypto')
+const bcrypt = require('bcryptjs')
 
 const refreshTokens = new mongoose.Schema({
   token: {
@@ -23,16 +24,19 @@ const refreshTokens = new mongoose.Schema({
 
 refreshTokens.static('generate', async function (user) {
   const token = createToken()
+  const hashedToken = await bcrypt.hash(createToken(), 10)
 
   const generatedDate = new Date()
   const expiryDate = new Date().setMonth(generatedDate.getMonth() + 1)
 
-  return await this.create({
-    token,
+  await this.create({
+    token: hashedToken,
     user: user._id,
     generatedDate,
     expiryDate,
   })
+
+  return { token, expiryDate }
 })
 
 const createToken = () => {

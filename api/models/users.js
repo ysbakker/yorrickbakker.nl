@@ -15,8 +15,7 @@ const users = new mongoose.Schema({
 })
 
 users.static('register', async function (username, password) {
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
+  const hash = await bcrypt.hash(password, 10)
   try {
     await this.create({ username, password: hash })
   } catch (e) {

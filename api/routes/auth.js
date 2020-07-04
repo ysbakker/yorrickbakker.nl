@@ -1,6 +1,7 @@
 const auth = require('express').Router()
 const usersModel = require('../models/users')
 const { verifySession } = require('../middleware/authentication')
+const sessionsModel = require('../models/sessions')
 
 auth.post('/login', async (req, res, next) => {
   const { username, password } = req.body
@@ -50,6 +51,13 @@ auth.get('/users', verifySession, async (req, res) => {
 })
 
 auth.get('/', verifySession, async (req, res) => {
+  const { token } = req.auth
+  const expires = await sessionsModel.refreshSession(token)
+  res.cookie('session-token', token, {
+    expires,
+    httpOnly: true,
+    secure: true,
+  })
   res.status(200).send()
 })
 

@@ -4,7 +4,7 @@
   "description": "The RESTful backend API for my portfolio website",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index"
+    "dev": "NODE_ENV=development nodemon index"
   },
   "author": "Yorrick Bakker",
   "license": "ISC",

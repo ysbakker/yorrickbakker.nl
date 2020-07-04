@@ -33,7 +33,9 @@ export const fetchMessages = () => {
     dispatch(toggleFetching(true))
 
     const messages = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/messages`)
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/messages`, {
+        credentials: 'include',
+      })
     ).json()
     dispatch(setMessages(messages))
 
@@ -48,6 +50,7 @@ export const deleteMessage = id => {
       `${process.env.NEXT_PUBLIC_API_URL}/messages/${id}`,
       {
         method: 'DELETE',
+        credentials: 'include',
       }
     )
     if (res.ok) dispatch(fetchMessages())

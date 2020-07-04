@@ -51,6 +51,7 @@ export const deleteProject = project => {
 
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
       method: 'DELETE',
+      credentials: 'include',
     })
 
     dispatch(deletingProject(false))
@@ -82,6 +83,7 @@ export const updateProject = project => {
 
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project._id}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -102,6 +104,7 @@ export const createProject = project => {
 
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

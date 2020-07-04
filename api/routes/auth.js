@@ -14,11 +14,7 @@ auth.post('/login', async (req, res, next) => {
   try {
     const { token, expires } = await usersModel.login(username, password)
 
-    res.cookie('session-token', token, {
-      expires: new Date(expires),
-      httpOnly: true,
-      secure: true,
-    })
+    attachSessionCookie(res, token, new Date(expires))
 
     return res.status(200).send()
   } catch (e) {
@@ -53,12 +49,17 @@ auth.get('/users', verifySession, async (req, res) => {
 auth.get('/', verifySession, async (req, res) => {
   const { token } = req.auth
   const expires = await sessionsModel.refreshSession(token)
+  attachSessionCookie(res, token, expires)
+  res.status(200).send()
+})
+
+const attachSessionCookie = (res, token, expires) => {
   res.cookie('session-token', token, {
     expires,
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: 'Lax',
   })
-  res.status(200).send()
-})
+}
 
 module.exports = auth

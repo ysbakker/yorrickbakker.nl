@@ -28,7 +28,7 @@ users.static('register', async function (username, password) {
 })
 
 users.static('login', async function (username, password) {
-  const user = await this.findOne({ username })
+  const user = await this.findOne({ username }).lean()
 
   const matching = user && (await bcrypt.compare(password, user.password))
 

@@ -3,7 +3,7 @@ const projectsModel = require('../models/projects')
 
 projects.get('/', async (req, res) => {
   try {
-    const projects = await projectsModel.find()
+    const projects = await projectsModel.find().lean()
     return res.send(projects)
   } catch (e) {
     return res.status(500).send({ message: e.message })

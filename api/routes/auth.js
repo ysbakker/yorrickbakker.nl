@@ -45,7 +45,7 @@ auth.post('/register', async (req, res, next) => {
 })
 
 auth.get('/users', verifySession, async (req, res) => {
-  const users = await usersModel.find()
+  const users = await usersModel.find().lean()
   return res.send(users)
 })
 

@@ -2,7 +2,7 @@ const messages = require('express').Router()
 const messagesModel = require('../models/messages')
 
 messages.get('/', async (req, res) => {
-  const messages = await messagesModel.find()
+  const messages = await messagesModel.find().lean()
   res.send(messages)
 })
 

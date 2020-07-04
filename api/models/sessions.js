@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const crypto = require('crypto')
-const bcrypt = require('bcryptjs')
 
 const sessions = new mongoose.Schema({
   token: {
@@ -10,13 +9,14 @@ const sessions = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
+    required: true,
     ref: 'Users',
   },
-  generatedDate: {
+  created: {
     type: Date,
     required: true,
   },
-  expiryDate: {
+  expires: {
     type: Date,
     required: true,
   },
@@ -24,19 +24,27 @@ const sessions = new mongoose.Schema({
 
 sessions.static('generate', async function (user) {
   const token = createToken()
-  const hashedToken = await bcrypt.hash(createToken(), 10)
 
-  const generatedDate = new Date()
-  const expiryDate = new Date().setMonth(generatedDate.getMonth() + 1)
+  const created = new Date()
+  const expires = new Date().setMonth(created.getMonth() + 1)
 
   await this.create({
-    token: hashedToken,
+    token,
     user: user._id,
-    generatedDate,
-    expiryDate,
+    created,
+    expires,
   })
 
-  return { token, expiryDate }
+  return { token, expires }
+})
+
+sessions.static('verifyToken', async function (token) {
+  const result = await this.findOne({ token }).populate('user')
+
+  if (!result || result.expires.getTime() < new Date().getTime())
+    throw new Error()
+
+  return result
 })
 
 const createToken = () => {

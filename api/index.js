@@ -18,7 +18,7 @@ mongoose
 
 app.use(
   cors({
-    origin: process.env.ORIGINS.split(','),
+    origin: process.env.ORIGINS.split(',').map(origin => new RegExp(origin)),
     credentials: true,
   })
 )

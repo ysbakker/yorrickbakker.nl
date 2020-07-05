@@ -107,3 +107,4 @@ dist
 
 # User additions
 conf/
+deploy.sh

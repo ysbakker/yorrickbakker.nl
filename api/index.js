@@ -38,3 +38,9 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(process.env.PORT)
+
+// Seed database
+const usersModel = require('./models/users')
+;(async () => {
+  await usersModel.seed()
+})()

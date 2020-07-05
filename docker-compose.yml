@@ -1,0 +1,29 @@
+version: '2.4'
+
+services:
+  database:
+    restart: always
+    image: mongo
+    expose:
+      - '27017'
+    mem_limit: 100m
+  api.yorrickbakker.nl:
+    restart: always
+    build: ./api/
+    image: ysbakker/yorrickbakker-api
+    env_file:
+      - ./api/.env.production
+    mem_limit: 100m
+    ports:
+      - '3002:3000'
+    depends_on:
+      - 'database'
+  yorrickbakker.nl:
+    restart: always
+    build: .
+    image: ysbakker/yorrickbakker-client
+    mem_limit: 40m
+    depends_on:
+      - 'api.yorrickbakker.nl'
+    ports:
+      - '3003:80'

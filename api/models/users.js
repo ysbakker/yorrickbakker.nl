@@ -41,4 +41,15 @@ users.static('login', async function (username, password) {
   return await sessionsModel.generate(user)
 })
 
+users.static('seed', async function () {
+  const username = process.env.ADMIN_USER
+  const password = process.env.ADMIN_PASSWORD
+
+  try {
+    await this.register(username, password)
+  } catch (e) {
+    // Silently ignore error
+  }
+})
+
 module.exports = mongoose.model('Users', users)

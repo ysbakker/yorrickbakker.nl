@@ -5,8 +5,8 @@ import Messages from './Messages'
 const Layout = () => {
   return (
     <div className="admin-container">
-      <Projects />
       <Messages />
+      <Projects />
     </div>
   )
 }

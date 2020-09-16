@@ -6,10 +6,11 @@ const IntroText = () => {
     <Slanted className="overlap">
       <div className="purple">
         <p>
-          Ik ben Yorrick, {age('1999-03-03')} jaar oud en tweedejaars student
-          web development aan de HAN in Arnhem. Binnen de informatica heb ik een
-          breed interessegebied. Momenteel richt ik me vooral op React en
-          NodeJS, maar ik sta altijd open voor nieuwe ideeën en technieken!
+          Ik ben Yorrick, {age('1999-03-03')} jaar oud en derdejaars student web
+          development aan de HAN in Arnhem. Op het moment loop ik stage bij de
+          Belastingdienst in Apeldoorn bij het Mobile Competence Center. Ik hoop
+          hier mijn kennis op het gebied van .NET en projectontwikkeling uit te
+          breiden.
         </p>
       </div>
     </Slanted>

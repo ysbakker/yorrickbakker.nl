@@ -1,6 +1,7 @@
 const messages = require('express').Router()
 const messagesModel = require('../models/messages')
 const { verifySession } = require('../middleware/authentication')
+const notify = require('../services/telegram')
 
 messages.get('/', verifySession, async (req, res) => {
   const messages = await messagesModel.find().lean()
@@ -10,6 +11,7 @@ messages.get('/', verifySession, async (req, res) => {
 messages.post('/', async (req, res) => {
   const message = req.body
   try {
+    notify(`Nieuw bericht!\n\n${message.message}`)
     await messagesModel.create(message)
   } catch (e) {
     return res.status(500).send({ message: e.message })

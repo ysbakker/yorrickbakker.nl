@@ -7,7 +7,7 @@ services:
     expose:
       - '27017'
     mem_limit: 100m
-  api.yorrickbakker.nl:
+  api:
     restart: always
     build: ./api/
     image: ysbakker/yorrickbakker-api
@@ -18,12 +18,12 @@ services:
       - '3002:3000'
     depends_on:
       - 'database'
-  yorrickbakker.nl:
+  client:
     restart: always
     build: .
     image: ysbakker/yorrickbakker-client
     mem_limit: 40m
     depends_on:
-      - 'api.yorrickbakker.nl'
+      - 'api'
     ports:
       - '3003:80'

@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from '../../css/TechnologyIcons.module.sass'
-import { FaDocker, FaReact, FaNodeJs, FaQuestionCircle } from 'react-icons/fa'
+import { FaDocker, FaReact, FaNodeJs, FaQuestionCircle, FaVuejs, FaAws, FaGoogle } from 'react-icons/fa'
 import { DiMongodb } from 'react-icons/di'
+import { AiFillGoogleCircle } from 'react-icons/ai'
 import { Tooltip } from 'antd'
 
 const TechnologyIcons = ({ technologies }) => {
@@ -32,6 +33,15 @@ const iconParser = name => {
       return <FaNodeJs className={styles[name]} />
     case 'mongodb':
       return <DiMongodb className={styles[name]} />
+    case 'vue.js':
+    case 'vuejs':
+    case 'vue':
+      return <FaVuejs className={styles.vue} />
+    case 'golang':
+    case 'go':
+      return <AiFillGoogleCircle className={styles.go} />
+    case 'aws':
+      return <FaAws className={styles[name]} />
     default:
       return <FaQuestionCircle />
   }

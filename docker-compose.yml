@@ -1,0 +1,9 @@
+version: '2.4'
+
+services:
+  app:
+    restart: always
+    build: .
+    image: ysbakker/yorrickbakker-app
+    ports:
+      - '3003:80'

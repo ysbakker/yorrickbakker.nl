@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="w-full h-full overflow-hidden">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+
+  <title>Yorrick Bakker</title>
+
   <link rel="stylesheet" href="styles.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.6.96/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
-<body>
-  <div class="w-full bg-black">Bruh moment</div>
+<body class="w-full h-full overflow-hidden bg-slate-50 dark:bg-slate-900 flex flex-col justify-center items-center">
+  <div class="w-full flex flex-1 sm:flex-initial flex-col justify-center items-center">
+    <h1 class="font-serif text-4xl sm:text-5xl 2xl:text-6xl pb-2 text-neutral-800 dark:text-neutral-100">Yorrick Bakker</h1>
+    <span class="block font-mono text-lg sm:text-xl 2xl:text-2xl text-neutral-700 dark:text-neutral-200">Software Engineer</span>
+  </div>
+  <div class="p-4 text-4xl flex justify-around w-9/12 sm:w-auto gap-3">
+    <a class="hover:-translate-y-1 transition-transform duration-200 text-[#333] dark:text-[#fafafa] flex-1 text-center " href="https://github.com/ysbakker" target="_blank">
+      <span class="mdi mdi-github"></span>
+    </a>
+    <a href="https://www.linkedin.com/in/yorrick-bakker-203938173/" target="_blank" class="hover:-translate-y-1 transition-transform duration-200 text-[#0077b5] flex-1 text-center ">
+      <span class="mdi mdi-linkedin"></span>
+    </a>
+    <a href="mailto:hi@yorrick.dev" class="hover:-translate-y-1 transition-transform duration-200 text-[#4285f4] flex-1 text-center">
+      <span class="mdi mdi-email"></span>
+    </a>
+  </div>
 </body>
 </html>

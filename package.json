@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "postcss styles.css -o src/styles.css",
-    "watch": "watch 'yarn build' ./src/"
+    "watch": "watch 'yarn build' ./src/ --interval 1"
   },
   "dependencies": {
     "autoprefixer": "^10.4.7",

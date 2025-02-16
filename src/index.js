@@ -1,7 +1,7 @@
 const INTERVAL_DELAY = 5000;
 
 const DIST_REACTIVITY_THRESHOLD = 100
-const DIST_OUT_OF_RANGE = 250
+const DIST_OUT_OF_RANGE = 200
 const MOUSE_REACTIVITY_MULTIPLIER = 4
 let charElements = [];
 let elementTransforms = [];
@@ -35,8 +35,6 @@ const charItUp = (el) => {
 
   charItUp(nameElement)
   charItUp(titleElement)
-
-  console.log(charElements)
 })();
 
 const onMouseMove = (event) => {

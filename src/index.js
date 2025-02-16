@@ -112,7 +112,6 @@ const ongoingTouchIndexById = (idToFind) => {
 }
 
 const handleStart = (evt) => {
-  evt.preventDefault();
   const touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
@@ -121,7 +120,6 @@ const handleStart = (evt) => {
 }
 
 const handleMove = (evt) => {
-  evt.preventDefault();
   const touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
@@ -138,7 +136,6 @@ const handleMove = (evt) => {
 }
 
 const handleEnd = (evt) => {
-  evt.preventDefault();
   const touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {

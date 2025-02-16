@@ -39,11 +39,11 @@ const charItUp = (el) => {
 
 const onMouseMove = (event) => {
   for (const char of charElements) {
-    moveAwayFromMouse(char, event)
+    moveAwayFromMouse(char, event.clientX, event.clientY)
   }
 }
 
-const moveAwayFromMouse = (el, event) => {
+const moveAwayFromMouse = (el, cursorX, cursorY) => {
   if (!el) {
     return
   }
@@ -53,14 +53,12 @@ const moveAwayFromMouse = (el, event) => {
 
   const charRect = el.getBoundingClientRect();
 
-  // Determine if mouse is close enough to character
-  const { clientX: mouseX, clientY: mouseY } = event
-
+  // Determine if cursor is close enough to character
   const { x, y, width, height } = charRect
   const centerX = x + width / 2
   const centerY = y + height / 2
 
-  const dist = Math.sqrt(Math.pow(Math.abs(centerX - mouseX), 2) + Math.pow(Math.abs(centerY - mouseY), 2))
+  const dist = Math.sqrt(Math.pow(Math.abs(centerX - cursorX), 2) + Math.pow(Math.abs(centerY - cursorY), 2))
 
   if (dist > DIST_OUT_OF_RANGE && transformX !== 0 && transformY !== 0) {
     // Reset transform
@@ -81,8 +79,8 @@ const moveAwayFromMouse = (el, event) => {
   // Apply negative force on character
   const inverseDist = (1 / Math.max(dist, 1)) * MOUSE_REACTIVITY_MULTIPLIER;
 
-  const dx = mouseX - centerX
-  const dy = mouseY - centerY
+  const dx = cursorX - centerX
+  const dy = cursorY - centerY
   transformX -= (dx < 0 ? Math.floor(dx) : Math.ceil(dx)) * inverseDist
   transformY -= (dy < 0 ? Math.floor(dy) : Math.ceil(dy)) * inverseDist
   applyTransform(el, transformX, transformY)
@@ -95,3 +93,63 @@ const applyTransform = (el, x, y) => {
 }
 
 document.addEventListener('mousemove', onMouseMove)
+
+const ongoingTouches = []
+
+const copyTouch = ({ identifier, pageX, pageY }) => {
+  return { identifier, pageX, pageY };
+}
+
+const ongoingTouchIndexById = (idToFind) => {
+  for (let i = 0; i < ongoingTouches.length; i++) {
+    const id = ongoingTouches[i].identifier;
+
+    if (id === idToFind) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+const handleStart = (evt) => {
+  evt.preventDefault();
+  const touches = evt.changedTouches;
+
+  for (let i = 0; i < touches.length; i++) {
+    ongoingTouches.push(copyTouch(touches[i]));
+  }
+}
+
+const handleMove = (evt) => {
+  evt.preventDefault();
+  const touches = evt.changedTouches;
+
+  for (let i = 0; i < touches.length; i++) {
+    const idx = ongoingTouchIndexById(touches[i].identifier);
+
+    if (idx >= 0) {
+      for (const char of charElements) {
+        moveAwayFromMouse(char, ongoingTouches[idx].pageX, ongoingTouches[idx].pageY)
+      }
+
+      ongoingTouches.splice(idx, 1, copyTouch(touches[i]));
+    }
+  }
+}
+
+const handleEnd = (evt) => {
+  evt.preventDefault();
+  const touches = evt.changedTouches;
+
+  for (let i = 0; i < touches.length; i++) {
+    let idx = ongoingTouchIndexById(touches[i].identifier);
+
+    if (idx >= 0) {
+      ongoingTouches.splice(idx, 1);
+    }
+  }
+}
+
+document.addEventListener('touchstart', handleStart, { passive: false });
+document.addEventListener('touchmove', handleMove, { passive: false });
+document.addEventListener('touchend', handleEnd, { passive: false });

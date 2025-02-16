@@ -1,9 +1,15 @@
-(() => {
-  const INTERVAL_DELAY = 5000;
-  const nameElement = document.getElementById('name');
-  const name = nameElement.innerHTML;
+const INTERVAL_DELAY = 5000;
 
-  const charElements = [...name].map(c => {
+const DIST_REACTIVITY_THRESHOLD = 100
+const DIST_OUT_OF_RANGE = 250
+const MOUSE_REACTIVITY_MULTIPLIER = 4
+let charElements = [];
+let elementTransforms = [];
+
+const charItUp = (el) => {
+  const elHtml = el.innerHTML;
+
+  const chars = [...elHtml].map(c => {
     const el = document.createElement('span');
     el.style.display = 'inline-block';
     el.style.whiteSpace = 'pre';
@@ -11,77 +17,83 @@
     return el;
   });
 
-  nameElement.innerText = ''
-  charElements.forEach(el => nameElement.appendChild(el));
+  const transforms = [...elHtml].map(_ => [0, 0])
 
-  setInterval(() => {
-    animateRandom(charElements)
-  }, INTERVAL_DELAY)
+  el.innerText = ''
+  chars.forEach(c => el.appendChild(c));
+
+  charElements = charElements.concat(chars)
+  elementTransforms = elementTransforms.concat(transforms)
+}
+
+(() => {
+  const nameElement = document.getElementById('name');
+  const titleElement = document.getElementById('title');
+  if (!nameElement || !titleElement) {
+    return;
+  }
+
+  charItUp(nameElement)
+  charItUp(titleElement)
+
+  console.log(charElements)
 })();
 
-/**
- * 
- * @param {HTMLSpanElement[]} elements 
- */
-const animateRandom = (elements) => {
-  const index = Math.floor(Math.random() * elements.length);
-  const animation = animationFunctions[Math.floor(Math.random() * animationFunctions.length)];
-  console.log(animation.name, index)
-
-  if (elements[index].textContent === ' ') return animateRandom(elements)
-  animation(elements[index]);
-};
-
-/**
- * 
- * @param {HTMLSpanElement} element 
- */
-const bounce = (element) => {
-  anime.timeline().add({
-    targets: element,
-    translateY: -40,
-    duration: 150,
-    easing: 'easeOutQuad'
-  }).add({
-    targets: element,
-    translateY: 0,
-    duration: 750,
-    easing: 'easeOutBounce'
-  });
+const onMouseMove = (event) => {
+  for (const char of charElements) {
+    moveAwayFromMouse(char, event)
+  }
 }
 
-/**
- * 
- * @param {HTMLSpanElement} element 
- */
-const rotate = (element) => {
-  anime({
-    targets: element,
-    rotate: [0, 360],
-    duration: 2000,
-  });
+const moveAwayFromMouse = (el, event) => {
+  if (!el) {
+    return
+  }
+
+  let transformX = elementTransforms[charElements.indexOf(el)][0]
+  let transformY = elementTransforms[charElements.indexOf(el)][1]
+
+  const charRect = el.getBoundingClientRect();
+
+  // Determine if mouse is close enough to character
+  const { clientX: mouseX, clientY: mouseY } = event
+
+  const { x, y, width, height } = charRect
+  const centerX = x + width / 2
+  const centerY = y + height / 2
+
+  const dist = Math.sqrt(Math.pow(Math.abs(centerX - mouseX), 2) + Math.pow(Math.abs(centerY - mouseY), 2))
+
+  if (dist > DIST_OUT_OF_RANGE && transformX !== 0 && transformY !== 0) {
+    // Reset transform
+    transformX = 0;
+    transformY = 0;
+    el.style.transition = 'transform .5s'
+    setTimeout(() => {
+      el.style.transition = 'none'
+    }, 500)
+    applyTransform(el, transformX, transformY)
+    return;
+  }
+
+  if (dist > DIST_REACTIVITY_THRESHOLD) {
+    return
+  }
+
+  // Apply negative force on character
+  const inverseDist = (1 / Math.max(dist, 1)) * MOUSE_REACTIVITY_MULTIPLIER;
+
+  const dx = mouseX - centerX
+  const dy = mouseY - centerY
+  transformX -= (dx < 0 ? Math.floor(dx) : Math.ceil(dx)) * inverseDist
+  transformY -= (dy < 0 ? Math.floor(dy) : Math.ceil(dy)) * inverseDist
+  applyTransform(el, transformX, transformY)
 }
 
-/**
- * 
- * @param {HTMLSpanElement} element 
- */
-const magnify = (element) => {
-  anime.timeline().add({
-    targets: element,
-    scale: 2,
-    duration: 600,
-    easing: 'easeOutQuad'
-  }).add({
-    targets: element,
-    scale: 1,
-    duration: 300,
-    easing: 'easeOutBack'
-  });
+const applyTransform = (el, x, y) => {
+  el.style.transform = `translate(${x}px, ${y}px)`
+  elementTransforms[charElements.indexOf(el)][0] = x
+  elementTransforms[charElements.indexOf(el)][1] = y
 }
 
-const animationFunctions = [
-  bounce,
-  rotate,
-  magnify,
-]
+document.addEventListener('mousemove', onMouseMove)
